@@ -14,7 +14,7 @@ sudo pacman -S --needed --noconfirm \
 	telegram-desktop \
 	nodejs yarn \
 	openssh \
-	neovim tmux bmon htop curl wget p7zip jq
+	neovim tmux bmon htop curl wget p7zip jq stow
 
 if ! command -v paru &> /dev/null
 then
@@ -37,4 +37,5 @@ paru -S --noconfirm --needed \
 
 echo -e "${GREEN}Package Installation Completed!!${NC}"
 
-
+stow fish
+stow awesome
