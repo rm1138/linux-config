@@ -9,12 +9,18 @@ sudo pacman -S --needed --noconfirm \
 	base-devel \
 	docker \
         firefox-developer-edition chromium \
-       	alacritty fish awesome picom \
+       	alacritty \ # terminal emulator
+	fish \ # shell
+	picom \ # X11 compositor
 	rust \
 	telegram-desktop \
 	nodejs yarn \
 	openssh \
-	neovim tmux bmon htop curl wget p7zip jq stow tree feh
+	neovim tmux bmon htop curl wget p7zip jq tree \
+	stow \ # .config management
+	feh \ # wallpaper
+	dunst \ # notification
+	ulauncher \ # app launcher
 
 if ! command -v paru &> /dev/null
 then
@@ -33,13 +39,15 @@ paru -S --noconfirm --needed \
 	intellij-idea-ultimate-edition-jre webstorm-jre \
        	visual-studio-code-bin \
        	slack-desktop \
-	enpass-bin \
-	auto-cpufreq
+	enpass-bin \ # password manager
+	auto-cpufreq \ # cpu speed & power optimizer 
 
 echo -e "${GREEN}Package Installation Completed!!${NC}"
 
 stow bspwm
 stow sxhkd
 stow polybar
+stow dunst
+stow ulauncher
 
 sudo systemctl enable auto-cpufreq
