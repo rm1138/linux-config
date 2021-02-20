@@ -32,7 +32,7 @@ killall -q dunst; dunst &
 
 # session lock
 xset s on
-xset s 300 300
+xset s 600 1
 export XSECURELOCK_SHOW_HOSTNAME=0
 export XSECURELOCK_SHOW_USERNAME=0
 export XSECURELOCK_SHOW_DATETIME=0
