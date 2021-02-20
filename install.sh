@@ -14,7 +14,7 @@ sudo pacman -S --needed --noconfirm \
 	telegram-desktop \
 	nodejs yarn \
 	openssh \
-	neovim tmux bmon htop curl wget p7zip jq stow
+	neovim tmux bmon htop curl wget p7zip jq stow tree feh
 
 if ! command -v paru &> /dev/null
 then
@@ -33,9 +33,13 @@ paru -S --noconfirm --needed \
 	intellij-idea-ultimate-edition-jre webstorm-jre \
        	visual-studio-code-bin \
        	slack-desktop \
-	enpass-bin
+	enpass-bin \
+	auto-cpufreq
 
 echo -e "${GREEN}Package Installation Completed!!${NC}"
 
-stow fish
-stow awesome
+stow bspwm
+stow sxhkd
+stow polybar
+
+sudo systemctl enable auto-cpufreq
