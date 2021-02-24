@@ -3,7 +3,7 @@
 pgrep -x sxhkd > /dev/null || sxhkd &
 pgrep -x ulauncher > /dev/null || ulauncher --hide-window --no-window-shadow &
 
-bspc monitor -d I II III IV V
+bspc monitor -d 'Main' 'Code' 'Web' 'Term' 'Chat' '6' '7' '8' '9' '0'
 
 bspc config border_width         2
 bspc config window_gap          12
