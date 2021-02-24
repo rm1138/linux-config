@@ -20,7 +20,10 @@ sudo pacman -S --needed --noconfirm \
 	stow \
 	feh \
 	dunst \
-	ulauncher
+	ulauncher \
+	fcitx \
+	fcitx-table-extra \
+	lxappearance-gtk3
 
 if ! command -v paru &> /dev/null
 then
@@ -40,7 +43,7 @@ paru -S --noconfirm --needed \
        	visual-studio-code-bin \
        	slack-desktop \
 	enpass-bin \
-	auto-cpufreq 
+	auto-cpufreq
 
 echo -e "${GREEN}Package Installation Completed!!${NC}"
 
@@ -55,3 +58,4 @@ stow mpv
 
 echo -e "${GREEN}Configuration files linked${NC}"
 sudo systemctl enable auto-cpufreq
+

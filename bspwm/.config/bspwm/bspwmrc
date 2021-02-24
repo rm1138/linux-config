@@ -11,12 +11,16 @@ bspc config window_gap          12
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
+bspc config focused_border_color  "#FFB52A"
 
 bspc rule -a Gimp desktop='^8' state=floating follow=on
 bspc rule -a Chromium desktop='^2'
 bspc rule -a mplayer2 state=floating
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Screenkey manage=off
+
+# Java application fix
+wmname LG3D &
 
 # wallpaper
 feh --bg-fill $HOME/.config/bspwm/wallpaper.png
@@ -25,7 +29,7 @@ feh --bg-fill $HOME/.config/bspwm/wallpaper.png
 $HOME/.config/polybar/launch.sh
 
 # compositor
-killall -q picom; picom --config $HOME/.config/picom/picom.conf
+killall -q picom; picom --config $HOME/.config/picom/picom.conf &
 
 # notification
 killall -q dunst; dunst &
@@ -43,3 +47,6 @@ export XSECURELOCK_DISCARD_FIRST_KEYPRESS=1
 export XSECURELOCK_FONT="Noto Sans CJK TC,Noto Sans CJK TC Medium:style=Medium,Regular"
 export XSECURELOCK_DIM_TIME_MS=1000
 killall -q xss-lock; xss-lock -n /usr/lib/xsecurelock/dimmer -l -- xsecurelock &
+
+# fcitx
+fcitx &
