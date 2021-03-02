@@ -43,7 +43,8 @@ paru -S --noconfirm --needed \
        	visual-studio-code-bin \
        	slack-desktop \
 	enpass-bin \
-	auto-cpufreq
+	auto-cpufreq \
+	bluez-utils
 
 echo -e "${GREEN}Package Installation Completed!!${NC}"
 

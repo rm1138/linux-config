@@ -23,7 +23,7 @@ background-alt = #444
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
 foreground-alt = #555
-primary = #ffb52a
+primary = #498391
 secondary = #e60053
 alert = #bd2c40
 
@@ -61,7 +61,7 @@ modules-right = pulseaudio cpu memory temperature wlan eth battery powermenu
 
 tray-position = right
 tray-padding = 2
-tray-background = #222
+tray-background = ${colors.background}
 
 wm-restack = bspwm
 ;wm-restack = i3
@@ -209,7 +209,7 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = "CPU "
+format-prefix = "CPU: "
 format-prefix-foreground = ${colors.foreground-alt}
 #format-underline = #f90000
 format = <label> <bar-load>
@@ -227,7 +227,7 @@ bar-load-empty-foreground = #444444
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = "RAM "
+format-prefix = "MEM: "
 format = <label> <bar-used>
 format-prefix-foreground = ${colors.foreground-alt}
 #format-underline = #4bffdc
@@ -246,7 +246,7 @@ bar-used-empty-foreground = #444444
 [module/wlan]
 type = internal/network
 interface = wlp37s0
-interval = 3.0
+interval = 15.0
 
 format-connected = <ramp-signal> <label-connected>
 format-connected-underline = #9f78e1
@@ -268,7 +268,7 @@ ramp-signal-foreground = ${colors.foreground-alt}
 [module/eth]
 type = internal/network
 interface = enp38s0
-interval = 3.0
+interval = 15.0
 
 #format-connected-underline = #55aa55
 format-connected-prefix = " "
@@ -301,10 +301,10 @@ label = %date% | %time%
 type = internal/pulseaudio
 
 format-volume = <label-volume> <bar-volume>
-label-volume = VOL %percentage%%
+label-volume = vol %percentage%%
 label-volume-foreground = ${root.foreground}
 
-label-muted = 🔇 muted
+label-muted = muted
 label-muted-foreground = #666
 
 bar-volume-width = 10
@@ -388,20 +388,22 @@ animation-discharging-framerate = 750
 [module/temperature]
 type = internal/temperature
 hwmon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp2_input
+interval = 5.0
+base-temperature = 40
 warn-temperature = 70
 
 format = <ramp> <label>
-#format-underline = #f50a4d
 format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
+#format-underline = #f50a4d
+#format-warn-underline = ${self.format-underline}
 
-label = CPU %temperature-c%
-label-warn = CPU %temperature-c%
+label = %temperature-c%
+label-warn = %temperature-c%
 label-warn-foreground = ${colors.secondary}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
+ramp-0 = CPU:
+ramp-1 = CPU:
+ramp-2 = CPU:
 ramp-foreground = ${colors.foreground-alt}
 
 [module/powermenu]
