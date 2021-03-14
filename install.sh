@@ -7,9 +7,9 @@ NC='\033[0m'
 echo -e "${GREEN}Installing package from Offical Repo${NC}"
 sudo pacman -S --needed --noconfirm \
 	base-devel \
-	docker \
+	docker docker-compose \
         firefox-developer-edition chromium \
-       	alacritty \ 
+       	alacritty \
 	fish \
 	picom \
 	rust \
@@ -23,7 +23,12 @@ sudo pacman -S --needed --noconfirm \
 	ulauncher \
 	fcitx \
 	fcitx-table-extra \
-	lxappearance-gtk3
+	fcitx-configtool \
+	lxappearance-gtk3 \
+	xorg-xrandr \
+	pulsemixer brightnessctl \
+	xsecurelock xss-lock mpv \
+	wmname
 
 if ! command -v paru &> /dev/null
 then
@@ -44,7 +49,11 @@ paru -S --noconfirm --needed \
        	slack-desktop \
 	enpass-bin \
 	auto-cpufreq \
-	bluez-utils
+	bluez-utils \
+	bspwm \
+	sxhkd \
+	polybar \
+	fcitx-qt5 \
 
 echo -e "${GREEN}Package Installation Completed!!${NC}"
 
@@ -60,3 +69,17 @@ stow mpv
 echo -e "${GREEN}Configuration files linked${NC}"
 sudo systemctl enable auto-cpufreq
 
+
+
+
+# Docker user
+
+sudo usermod -aG docker $USER
+
+# Git config
+git config --global user.name "Ricky Lam"
+git config --global user.email "rm1138@gmail.com"
+git config --global pull.rebase true
+
+# Wifi config
+sudo cp ./wifi/70-wifi-wired-exclusive.sh /etc/NetworkManager/dispatcher.d/

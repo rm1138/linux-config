@@ -28,9 +28,9 @@ secondary = #e60053
 alert = #bd2c40
 
 [bar/bottom-bar]
-;monitor = ${env:MONITOR:HDMI-1}
+monitor = ${env:MONITOR:}
 width = 100%
-height = 25
+height = 28
 ;offset-x = 1%
 ;offset-y = 1%
 radius = 0
@@ -42,7 +42,7 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-border-size = 4
+border-size = 0
 border-color = #00000000
 
 padding-left = 2
@@ -51,13 +51,25 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
+;font-0 = "Hack:fontformat=truetype:size=11;1"
+;font-1 = "FontAwesome:fontformat=truetype:size=11;1"
+;font-2 = "siji:pixelsize=11;1"
+;font-3 = "unifont:fontformat=truetype:size=11:antialias=false;0"
+;font-4 = "fixed:pixelsize=11;1"
+
 font-0 = fixed:pixelsize=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
-modules-left = date bspwm xwindow
+;font-0 = "Tamsyn:pixelsize=10;0"
+;font-1 = "Roboto:size=11:weight=bold;2"
+;font-2 = "Noto Sans:size=11;1"
+
+
+modules-left = date bspwm
 modules-center = 
-modules-right = pulseaudio cpu memory temperature wlan eth battery powermenu
+;xwindow
+modules-right = wlan eth xbacklight pulseaudio cpu memory temperature battery powermenu
 
 tray-position = right
 tray-padding = 2
@@ -77,42 +89,17 @@ wm-restack = bspwm
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-bottom = true
+bottom = false
 
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:30:...%
 
-[module/xkeyboard]
-type = internal/xkeyboard
-blacklist-0 = num lock
-
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-#format-prefix-underline = ${colors.secondary}
-
-label-layout = %layout%
-#label-layout-underline = ${colors.secondary}
-
-label-indicator-padding = 2
-label-indicator-margin = 1
-label-indicator-background = ${colors.secondary}
-label-indicator-underline = ${colors.secondary}
-
-[module/filesystem]
-type = internal/fs
-interval = 25
-
-mount-0 = /
-
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
-label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.foreground-alt}
 
 [module/bspwm]
 type = internal/bspwm
 format = <label-state>
-
+pin-workspaces = true
 enable-click = true
 label-focused = %name%
 label-focused-padding = 1
@@ -129,20 +116,6 @@ label-urgent-padding = 1
 label-empty = %name%
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 1
-
-
-[module/mpd]
-type = internal/mpd
-format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
-
-icon-prev = 
-icon-stop = 
-icon-play = 
-icon-pause = 
-icon-next = 
-
-label-song-maxlen = 25
-label-song-ellipsis = true
 
 [module/xbacklight]
 type = internal/xbacklight
@@ -161,10 +134,7 @@ bar-empty = ─
 bar-empty-font = 2
 bar-empty-foreground = ${colors.foreground-alt}
 
-[module/backlight-acpi]
-inherit = module/xbacklight
-type = internal/backlight
-card = intel_backlight
+output = eDP
 
 [module/cpu]
 type = internal/cpu
@@ -191,7 +161,7 @@ format-prefix = "MEM: "
 format = <label> <bar-used>
 format-prefix-foreground = ${colors.foreground-alt}
 #format-underline = #4bffdc
-label = %percentage_used:2%%
+label = %gb_used%
 
 bar-used-indicator =
 bar-used-width = 6
@@ -205,12 +175,12 @@ bar-used-empty-foreground = #444444
 
 [module/wlan]
 type = internal/network
-interface = wlp37s0
-interval = 15.0
+interface = wlp3s0
+interval = 1.0
 
-format-connected = <ramp-signal> <label-connected>
-format-connected-underline = #9f78e1
-label-connected = %essid%
+;format-connected-prefix = "Wifi: "
+format-connected = <label-connected>
+label-connected = ↓%downspeed% ↑%upspeed% [%essid%] 
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
@@ -227,15 +197,13 @@ ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]
 type = internal/network
-interface = enp38s0
-interval = 15.0
+interface = ${env:DEFAULT_NETWORK_INTERFACE:enp2s0f0}
+interval = 1.0
 
-#format-connected-underline = #55aa55
-format-connected-prefix = "LAN "
+format-connected-prefix = ""
 format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %local_ip%
+label-connected = ↓%downspeed% ↑%upspeed% [LAN]
 
-format-disconnected =
 ;format-disconnected = <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
@@ -315,56 +283,49 @@ bar-volume-empty-foreground = ${colors.foreground-alt}
 [module/battery]
 type = internal/battery
 battery = BAT0
-adapter = ADP1
-full-at = 98
+adapter = AC
+full-at = 95
 
-format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffb52a
+time-format = %H:%M
 
-format-discharging = <animation-discharging> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
+label-charging = %percentage%%
+format-charging = Charging <label-charging>
+format-charging-underline = #00ff00
 
-format-full-prefix = " "
+label-discharging = %percentage%% (%time%)
+format-discharging = <label-discharging>
+format-discharging-underline = #ff0000
+
+format-full-prefix = ""
 format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = ${self.format-charging-underline}
-
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-foreground = ${colors.foreground-alt}
-
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground-alt}
-animation-charging-framerate = 750
-
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
-animation-discharging-foreground = ${colors.foreground-alt}
-animation-discharging-framerate = 750
 
 [module/temperature]
 type = internal/temperature
-hwmon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon1/temp2_input
-interval = 5.0
-base-temperature = 40
+hwmon-path = ${env:HWMON_PATH}
+interval = 1.0
+base-temperature = 30
 warn-temperature = 70
 
-format = <ramp> <label>
-format-warn = <ramp> <label-warn>
-#format-underline = #f50a4d
-#format-warn-underline = ${self.format-underline}
+format = <label>
+format-warn = <label-warn>
 
 label = %temperature-c%
 label-warn = %temperature-c%
 label-warn-foreground = ${colors.secondary}
 
-ramp-0 = CPU:
-ramp-1 = CPU:
-ramp-2 = CPU:
-ramp-foreground = ${colors.foreground-alt}
+[module/temperature2]
+type = internal/temperature
+hwmon-path = ${env:HWMON_PATH}
+interval = 1.0
+base-temperature = 30
+warn-temperature = 70
+
+format = <label>
+format-warn = <label-warn>
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.secondary}
 
 [module/powermenu]
 type = custom/menu
@@ -373,36 +334,21 @@ expand-right = false
 
 format-spacing = 1
 
-label-open = Power
+label-open = Power
 label-open-foreground = ${colors.primary}
 label-close = Cancel
 label-close-foreground = ${colors.secondary}
 label-separator = |
 label-separator-foreground = ${colors.foreground-alt}
 
-#menu-0-0 = Reboot
-#menu-0-0-exec = menu-open-1
-#menu-0-1 = Power Off
-#menu-0-1-exec = menu-open-2
-#menu-0-2 = Suspend
-#menu-0-2-exec = menu-open-3
-menu-0-0 = Lock
-menu-0-0-exec = xset s activate
-
-menu-1-0 = Cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = Reboot
-menu-1-1-exec = sudo reboot
-
-menu-2-0 = Power Off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = Cancel
-menu-2-1-exec = menu-open-0
-
-menu-3-0 = Suspend
-menu-3-0-exec = systemctl suspend
-menu-3-1 = Cancel
-menu-3-1-exec = menu-open-0
+menu-0-0 = Reboot
+menu-0-0-exec = reboot
+menu-0-1 = Shutdown
+menu-0-1-exec = poweroff
+menu-0-2 = Suspend
+menu-0-2-exec = systemctl suspend
+menu-0-3 = Lock
+menu-0-3-exec = xset s activate
 
 [settings]
 screenchange-reload = true
@@ -414,6 +360,6 @@ screenchange-reload = true
 
 [global/wm]
 margin-top = 5
-margin-bottom = 5
+margin-bottom = 0
 
 ; vim:ft=dosini

@@ -1,3 +1,4 @@
+#!/usr/bin/env sh
 #
 # wm independent hotkeys
 #
@@ -81,10 +82,16 @@ super + {o,i}
 	bspc wm -h on
 
 # focus or send to the given desktop
-super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '^{1-9,10}'
+#super + {_,shift + }{1-9,0}
+#	bspc {desktop -f,node -d} '^{1-9,10}'
+super + {1-9,0}
+	export D={1-9,10}; \
+	bspc desktop -f (bspc query -D -m | sed -n "$D p")
 
-#
+super + shift + {1-9,0}
+	export D={1-9,10}; \
+	bspc node -d (bspc query -D -m | sed -n "$D p")
+
 # preselect
 #
 
@@ -119,3 +126,43 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# change focused node parent split direction
+super + {r}
+	bspc node -f @parent; bspc node -R 90
+
+super + alt + {1,2,3,4}
+	autorandr {mobile, home, home-external-only, benq}
+
+
+# brightness
+XF86MonBrightness{Up,Down}
+	brightnessctl s 30{+,-}
+
+# volume
+
+XF86Audio{Raise,Lower}Volume
+	pulsemixer --change-volume {+,-}10
+
+# mute
+XF86AudioMute
+	pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+# mic mute
+XF86AudioMicMute
+	pactl set-source-mute 2 toggle
+
+# display
+XF86Display
+	autorandr -c
+
+super + alt + 0
+	autorandr -c
+
+# show all opened windows
+super + F12
+	rofi -modi window -show window -show-icons -sidebar-mode
+
+# manually lock screen
+ctrl + alt + l
+	xset s activate
