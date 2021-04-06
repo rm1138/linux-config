@@ -1,0 +1,73 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "siji";
+  min-height: 0;
+  color: #ffffff;
+}
+
+window#waybar {
+  border-top: 1px solid #484848;
+}
+
+#clock, #workspace, #mode, #, #network, #pulseaudio, #cpu, #memory, #battery, #tray, #temperature {
+  padding: 0 10px 0 10px;
+  border-right: 1px solid #484848;
+}
+
+#temperature.critical {
+  background: #eb4d4b;
+}
+
+
+#battery.full {
+  padding: 0 5px 0 5px;
+}
+
+#battery.charging {
+  background: #98ddca;
+  color: #212121;
+}	
+
+
+@keyframes blink {
+    to {
+        background: #000000;
+	color: #ffffff;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#battery.warning:not(.charging) {
+    background: #ffd3b4;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+
+#workspaces button {
+  background: #000000;
+}
+
+#workspaces button.focused {
+  background: #484848;
+}
+
+#workspaces button.urgent {
+  background: #ffffff;
+  color: #212121;
+}
+

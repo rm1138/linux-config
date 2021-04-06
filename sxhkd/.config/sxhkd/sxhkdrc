@@ -166,3 +166,7 @@ super + F12
 # manually lock screen
 ctrl + alt + l
 	xset s activate
+
+# logout
+super + alt + Escape
+	bspc quit

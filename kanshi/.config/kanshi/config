@@ -1,0 +1,20 @@
+
+# Internal
+profile {
+	output "Unknown 0x062C 0x00000000" enable scale 1
+}
+
+
+# Home
+profile {
+	output "Unknown 0x062C 0x00000000" enable position 0,0 scale 1.2
+	output "Dell Inc. DELL U2913WM 5YD8C31H228L" mode 2560x1080 position 1600,0
+}
+
+# Office HDMI at left
+profile {
+	output HDMI-A-1 mode 1920x1080 position 0,0
+	output "Unknown 0x062C 0x00000000" enable position 1920,0 scale 1.2
+}
+
+

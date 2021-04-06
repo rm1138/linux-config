@@ -54,6 +54,7 @@ paru -S --noconfirm --needed \
 	sxhkd \
 	polybar \
 	fcitx-qt5 \
+	libinput-gestures xdotool wmctrl
 
 echo -e "${GREEN}Package Installation Completed!!${NC}"
 
