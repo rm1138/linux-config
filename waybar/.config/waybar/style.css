@@ -3,7 +3,6 @@
   border-radius: 0;
   font-family: "siji";
   min-height: 0;
-  color: #ffffff;
 }
 
 window#waybar {
@@ -15,8 +14,12 @@ window#waybar {
   border-right: 1px solid #484848;
 }
 
+#network.disconnected {
+  background-color: #484848;
+}
+
 #temperature.critical {
-  background: #eb4d4b;
+  background-color: #eb4d4b;
 }
 
 
@@ -25,20 +28,20 @@ window#waybar {
 }
 
 #battery.charging {
-  background: #98ddca;
+  background-color: #98ddca;
   color: #212121;
 }	
 
 
 @keyframes blink {
     to {
-        background: #000000;
+        background-color: #000000;
 	color: #ffffff;
     }
 }
 
 #battery.critical:not(.charging) {
-    background: #f53c3c;
+    background-color: #f53c3c;
     color: #ffffff;
     animation-name: blink;
     animation-duration: 1s;
@@ -48,7 +51,7 @@ window#waybar {
 }
 
 #battery.warning:not(.charging) {
-    background: #ffd3b4;
+    background-color: #ffd3b4;
     color: #ffffff;
     animation-name: blink;
     animation-duration: 0.5s;
@@ -59,15 +62,21 @@ window#waybar {
 
 
 #workspaces button {
-  background: #000000;
+  background-color: #000000;
+  padding: 0 5px 0 5px;
 }
 
 #workspaces button.focused {
-  background: #484848;
+  background-color: #484848;
 }
 
 #workspaces button.urgent {
-  background: #ffffff;
-  color: #212121;
+  color: #000000;
+  background-color: #ffffff;
+  animation-name: blink;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 

@@ -7,17 +7,6 @@
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": false,
-        "format": "{name}: {icon}",
-        "format-icons": {
-            "1": "Main",
-            "2": "Terminal",
-            "3": "Web",
-            "4": "Chat",
-            "5": "Other",
-            "urgent": "",
-            "focused": "",
-            "default": ""
-        }
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
@@ -50,7 +39,7 @@
         // "thermal-zone": 2,
         "hwmon-path": "/sys/class/hwmon/hwmon3/temp2_input",
 	//"input-filename": "hwmon4/temp2_input",
-        "critical-threshold": 65,
+        "critical-threshold": 75,
         "format-critical": "{temperatureC}°C",
         "format": "{temperatureC}°C",
 	"interval": 3
@@ -65,7 +54,7 @@
             "warning": 30,
             "critical": 15
         },
-	"full-at": 85,
+	"full-at": 84,
 	"interval": 60,
         "format": "{capacity}% {icon}",
         "format-charging": "{capacity}% ",
@@ -75,12 +64,12 @@
         "format-icons": ["", "", "", "", ""]
     },
     "network": {
-        "format-wifi": "{essid} ↓ {bandwidthDownBits} ↑ {bandwidthUpBits}",
+        "format-wifi": "↓ {bandwidthDownBits} ↑ {bandwidthUpBits}",
         "format-ethernet": "↓ {bandwidthDownBits} ↑ {bandwidthUpBits}",
         "format-linked": "{ifname} (No IP)",
-        "format-disconnected": "",
+        "format-disconnected": "Disconnected",
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
-	"tooltip-format-wifi": "{signalStrength}%",
+	"tooltip-format-wifi": "{essid} ({signalStrength}%)",
 	"interval": 3
     },
     "pulseaudio": {

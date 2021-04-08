@@ -60,6 +60,8 @@ exec swayidle -w \
        tap enabled
        natural_scroll enabled
        middle_emulation enabled
+       accel_profile adaptive
+       pointer_accel 0.3
    }
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
@@ -212,8 +214,9 @@ bindsym XF86AudioMicMute exec "pactl set-source-mute 1 toggle"
 bindsym XF86AudioRaiseVolume exec "pulsemixer --change-volume 5"
 bindsym XF86AudioLowerVolume exec "pulsemixer --change-volume -5"
 bindsym XF86AudioMute exec "pulsemixer --toggle-mute"
-bindsym XF86MonBrightnessUp exec "brightnessctl set +5%"
-bindsym XF86MonBrightnessDown exec "brightnessctl set 5%-"
+bindsym XF86MonBrightnessUp exec "brightnessctl set +10%"
+bindsym XF86MonBrightnessDown exec "brightnessctl set 10%-"
+bindsym $mod+alt+l exec "swaylock -f -c 000000 -i $bg"
 
 set $laptop eDP-1
 bindswitch --reload --locked lid:on output $laptop disable
