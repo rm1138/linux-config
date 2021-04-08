@@ -25,9 +25,8 @@ sudo pacman -S --needed --noconfirm \
 	fcitx-table-extra \
 	fcitx-configtool \
 	lxappearance-gtk3 \
-	xorg-xrandr \
 	pulsemixer brightnessctl \
-	xsecurelock xss-lock mpv \
+	mpv \
 	wmname
 
 if ! command -v paru &> /dev/null
@@ -50,22 +49,23 @@ paru -S --noconfirm --needed \
 	enpass-bin \
 	auto-cpufreq \
 	bluez-utils \
-	bspwm \
-	sxhkd \
-	polybar \
 	fcitx-qt5 \
 	libinput-gestures xdotool wmctrl
 
 echo -e "${GREEN}Package Installation Completed!!${NC}"
 
 stow fish
-stow bspwm
-stow sxhkd
-stow polybar
+#stow bspwm
+#stow sxhkd
+#stow polybar
 stow dunst
 stow ulauncher
 stow picom
 stow mpv
+stow sway
+stow waybar
+stow kanshi
+stow libinput-gestures
 
 echo -e "${GREEN}Configuration files linked${NC}"
 sudo systemctl enable auto-cpufreq
