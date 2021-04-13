@@ -1,18 +1,18 @@
 
 # Internal
-profile {
+profile "internal" {
 	output "Unknown 0x062C 0x00000000" enable scale 1
 }
 
 
 # Home
-profile {
+profile "home" {
 	output "Unknown 0x062C 0x00000000" enable position 0,0 scale 1.2
 	output "Dell Inc. DELL U2913WM 5YD8C31H228L" mode 2560x1080 position 1600,0
 }
 
 # Spaceship office ASUS Mon
-profile {
+profile "office" {
 	output "Ancor Communications Inc ASUS PB279 0x00006F9" mode 2560x1440 position 1600,0 scale 1
 	output "Unknown 0x062C 0x00000000" enable position 0,400 scale 1.2
 }

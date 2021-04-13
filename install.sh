@@ -10,7 +10,7 @@ sudo pacman -S --needed --noconfirm \
 	docker docker-compose \
         firefox-developer-edition chromium \
        	alacritty \
-	fish \
+	zsh \
 	picom \
 	rust \
 	telegram-desktop \
@@ -50,14 +50,17 @@ paru -S --noconfirm --needed \
 	auto-cpufreq \
 	bluez-utils \
 	fcitx-qt5 \
-	libinput-gestures xdotool wmctrl
+	libinput-gestures xdotool wmctrl \
+	insomnia-bin \
+	1password 
+
+
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 echo -e "${GREEN}Package Installation Completed!!${NC}"
 
-stow fish
-#stow bspwm
-#stow sxhkd
-#stow polybar
+stow zsh
+stow p10k
 stow dunst
 stow ulauncher
 stow picom
@@ -70,9 +73,6 @@ stow libinput-gestures
 echo -e "${GREEN}Configuration files linked${NC}"
 sudo systemctl enable auto-cpufreq
 
-
-
-
 # Docker user
 
 sudo usermod -aG docker $USER
@@ -81,6 +81,3 @@ sudo usermod -aG docker $USER
 git config --global user.name "Ricky Lam"
 git config --global user.email "rm1138@gmail.com"
 git config --global pull.rebase true
-
-# Wifi config
-sudo cp ./wifi/70-wifi-wired-exclusive.sh /etc/NetworkManager/dispatcher.d/

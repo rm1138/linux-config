@@ -241,3 +241,4 @@ exec enpass -minimize
 for_window [app_id="ulauncher"] border none
 
 include /etc/sway/config.d/*
+include ~/.config/sway/config.d/*.conf
