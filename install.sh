@@ -52,7 +52,10 @@ paru -S --noconfirm --needed \
 	fcitx-qt5 \
 	libinput-gestures xdotool wmctrl \
 	insomnia-bin \
-	1password 
+	1password \
+	sway \
+	kanshi \
+	waybar
 
 
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -63,7 +66,6 @@ stow zsh
 stow p10k
 stow dunst
 stow ulauncher
-stow picom
 stow mpv
 stow sway
 stow waybar

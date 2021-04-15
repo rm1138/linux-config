@@ -1,7 +1,7 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: "siji";
+  font-family: "siji", "noto-fonts-emoji";
   min-height: 0;
 }
 
@@ -9,9 +9,23 @@ window#waybar {
   border-top: 1px solid #484848;
 }
 
-#clock, #workspace, #mode, #, #network, #pulseaudio, #cpu, #memory, #battery, #tray, #temperature {
+#clock, #workspace, #mode, #, #network, #pulseaudio, #cpu, #memory, #battery, #tray, #temperature, #custom-weather {
   padding: 0 10px 0 10px;
-  border-right: 1px solid #484848;
+  border-right: 0px solid #484848;
+}
+
+#window {
+  padding: 0 20px 0 20px;
+}
+
+#custom-weather {
+  padding-top: 3px;
+  padding-left: 0;
+}
+
+#tray {
+  border-left: 1px solid #484848;
+  padding-right: 5px;
 }
 
 #network.disconnected {
@@ -22,10 +36,6 @@ window#waybar {
   background-color: #eb4d4b;
 }
 
-
-#battery.full {
-  padding: 0 5px 0 5px;
-}
 
 #battery.charging {
   background-color: #98ddca;

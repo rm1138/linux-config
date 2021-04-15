@@ -1,0 +1,5 @@
+add gdm and enable systemctl
+install font-awsome-5
+config gtk theme to make the waybar display correct theme
+
+

@@ -237,8 +237,8 @@ exec_always ~/.config/sway/config_gtk_theme.sh
 exec fcitx
 exec enpass -minimize
 
-
 for_window [app_id="ulauncher"] border none
+for_window [title="Tandem"] floating enable
 
 include /etc/sway/config.d/*
 include ~/.config/sway/config.d/*.conf

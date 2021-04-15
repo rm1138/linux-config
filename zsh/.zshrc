@@ -111,9 +111,6 @@ alias vim="nvim"
 
 export PATH="$PATH:$HOME/.cargo/bin"
 
-export GEM_HOME="$(ruby -e 'puts Gem.user_dir')"
-export PATH="$PATH:$GEM_HOME/bin"
-
 export TERM=xterm-256color
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
