@@ -83,3 +83,5 @@ sudo usermod -aG docker $USER
 git config --global user.name "Ricky Lam"
 git config --global user.email "rm1138@gmail.com"
 git config --global pull.rebase true
+
+echo 85 | sudo tee /sys/class/power_supply/BAT0/charge_stop_threshold
