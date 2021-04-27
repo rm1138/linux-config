@@ -108,10 +108,11 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim="nvim"
-
-export PATH="$PATH:$HOME/.cargo/bin"
-
+source $HOME/.cargo/env
+export PATH="$PATH:$HOME/.local/share/gem/ruby/2.7.0/bin"
 export TERM=xterm-256color
+export EDITOR=nvim
+source <(kubectl completion zsh)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

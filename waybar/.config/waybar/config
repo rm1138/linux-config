@@ -31,7 +31,7 @@
     },
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "format-alt": "{:%Y-%m-%d %H:%M:%S}"
     },
     "cpu": {
         "format": " {usage}%",
@@ -58,16 +58,16 @@
     },
     "battery": {
         "states": {
+	    "normal": 84,
             "warning": 30,
-            "critical": 15
+            "critical": 15,
         },
 	"full-at": 85,
 	"interval": 60,
-        "format": "{icon} {capacity}%",
         "format-charging": " {capacity}%",
-        "format-plugged": " {capacity}%",
-        "format-alt": "{time} {icon}",
-        "format-full": " 100%",
+        "format-plugged": "",
+	"format": "{icon} {capacity}%",
+        "format-alt": "{time}",
         "format-icons": ["", "", "", "", ""]
     },
     "network": {
