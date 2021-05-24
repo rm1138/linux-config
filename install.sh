@@ -19,7 +19,6 @@ sudo pacman -S --needed --noconfirm \
 	neovim tmux bmon htop curl wget p7zip jq tree \
 	stow \
 	feh \
-	dunst \
 	ulauncher \
 	fcitx \
 	fcitx-table-extra \
@@ -27,7 +26,9 @@ sudo pacman -S --needed --noconfirm \
 	lxappearance-gtk3 \
 	pulsemixer brightnessctl \
 	mpv \
-	wmname
+	wmname \
+	gdm \
+	fzf
 
 if ! command -v paru &> /dev/null
 then
@@ -53,12 +54,24 @@ paru -S --noconfirm --needed \
 	libinput-gestures xdotool wmctrl \
 	insomnia-bin \
 	1password \
-	sway \
+	dunst-git \
+	sway-git \
+	swaylock \
+	swayidle \
 	kanshi \
-	waybar
+	waybar \
+	otf-font-awesome \
+	ttf-font-awesome
 
+sudo systemctl enable gdm.service -f
 
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+# zsh p10k theme
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 echo -e "${GREEN}Package Installation Completed!!${NC}"
 

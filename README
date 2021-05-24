@@ -1,0 +1,4 @@
+nvim plugin
+
+1. vim :PlugInstall
+2. vim :CocInstall coc-json coc-tsserver coc-rust-analyzer

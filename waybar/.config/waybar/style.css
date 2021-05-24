@@ -6,12 +6,16 @@
 }
 
 window#waybar {
-  border-top: 1px solid #484848;
+  border-bottom: 1px solid #484848;
 }
 
 #clock, #workspace, #mode, #, #network, #pulseaudio, #cpu, #memory, #battery, #tray, #temperature, #custom-weather {
   padding: 0 10px 0 10px;
   border-right: 0px solid #484848;
+}
+
+#clock {
+  border-right: 1px solid #484848;
 }
 
 #window {
@@ -72,7 +76,6 @@ window#waybar {
 
 
 #workspaces button {
-  background-color: #000000;
   padding: 0 5px 0 5px;
 }
 

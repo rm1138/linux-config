@@ -15,7 +15,7 @@ export ZSH="/home/ricky/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -77,7 +77,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
@@ -109,10 +109,17 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim="nvim"
 source $HOME/.cargo/env
-export PATH="$PATH:$HOME/.local/share/gem/ruby/2.7.0/bin"
+export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 export TERM=xterm-256color
-export EDITOR=nvim
 source <(kubectl completion zsh)
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+eval "$(zoxide init zsh)"
+
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

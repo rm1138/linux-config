@@ -27,9 +27,9 @@ set $bg ~/.config/sway/wallpaper.png
 output * bg $bg fill
 
 # Hide the border
-default_border pixel 2
+default_border pixel 1
 
-gaps inner 10
+gaps inner 0
 
 #focus_follows_mouse no
 
@@ -45,8 +45,8 @@ gaps inner 10
 # Example configuration:
 #
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000 -i $bg' \
-         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+         timeout 600 'swaylock -f -c 000000 -i $bg' \
+         timeout 1200 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
          before-sleep 'swaylock -f -c 000000 -i $bg'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -216,16 +216,15 @@ bindsym XF86AudioMicMute exec "pactl set-source-mute 1 toggle"
 bindsym XF86AudioRaiseVolume exec "pulsemixer --change-volume 5"
 bindsym XF86AudioLowerVolume exec "pulsemixer --change-volume -5"
 bindsym XF86AudioMute exec "pulsemixer --toggle-mute"
-bindsym XF86MonBrightnessUp exec "brightnessctl set +10%"
-bindsym XF86MonBrightnessDown exec "brightnessctl set 10%-"
+bindsym XF86MonBrightnessUp exec "brightnessctl set +5%"
+bindsym XF86MonBrightnessDown exec "brightnessctl set 5%-"
 bindsym $mod+alt+l exec "swaylock -f -c 000000 -i $bg"
+bindsym $mod+alt+o exec "pacmd set-card-profile bluez_card.94_DB_56_70_C8_69 a2dp_sink"
+bindsym $mod+alt+p exec "pacmd set-card-profile bluez_card.94_DB_56_70_C8_69 headset_head_unit"
 
 set $laptop eDP-1
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
-
-# notification
-exec_always killall -q dunst; dunst
 
 # multiple screen control
 exec_always killall -q kanshi; kanshi
@@ -236,8 +235,14 @@ exec_always ~/.config/sway/screen_reload.sh
 # apply gtk theme
 exec_always ~/.config/sway/config_gtk_theme.sh
 
+# notification
+exec dunst
 exec fcitx
 exec enpass -minimize
+# exec slack -us
+exec telegram-desktop -startintray
+exec discord --start-minimized
+
 
 for_window [app_id="ulauncher"] border none
 for_window [title="Tandem"] floating enable

@@ -1,9 +1,9 @@
 {
-    "position": "bottom",
+    "position": "top",
     "height": 28,
     "modules-left": ["clock", "sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": [],
-    "modules-right": [ "network", "cpu", "memory", "temperature", "battery", "pulseaudio", "tray", "custom/weather"],
+    "modules-right": [ "network", "cpu", "memory", "temperature", "battery", "pulseaudio", "tray", "custom/weather", "idle_inhibitor"],
     "custom/weather": {
 	"format": "{}",
 	"tooltip": true,
@@ -21,8 +21,8 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "",
-            "deactivated": ""
+            "activated": "",
+            "deactivated": ""
         }
     },
     "tray": {
@@ -30,6 +30,7 @@
         "spacing": 5
     },
     "clock": {
+        "format": "{:%Y-%m-%d %H:%M %a}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d %H:%M:%S}"
     },
@@ -43,8 +44,8 @@
 	"interval": 3
     },
     "temperature": {
-        // "thermal-zone": 2,
-        "hwmon-path": "/sys/class/hwmon/hwmon3/temp2_input",
+        //"thermal-zone": 3,
+        "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
 	//"input-filename": "hwmon4/temp2_input",
         "critical-threshold": 75,
         "format-critical": " {temperatureC}°C",
