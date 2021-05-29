@@ -61,7 +61,9 @@ paru -S --noconfirm --needed \
 	kanshi \
 	waybar \
 	otf-font-awesome \
-	ttf-font-awesome
+	ttf-font-awesome \
+  autotiling-rs-git \
+  yofi-git
 
 sudo systemctl enable gdm.service -f
 

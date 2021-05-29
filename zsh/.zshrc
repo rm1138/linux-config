@@ -113,9 +113,6 @@ export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 export TERM=xterm-256color
 source <(kubectl completion zsh)
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 
 eval "$(zoxide init zsh)"
 
@@ -123,3 +120,8 @@ source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/linux-config/p10k/.p10k.zsh.
+[[ ! -f ~/linux-config/p10k/.p10k.zsh ]] || source ~/linux-config/p10k/.p10k.zsh
+alias connect-wm4='bluetoothctl power on && bluetoothctl connect "94:DB:56:70:C8:69"'
+alias cat=bat

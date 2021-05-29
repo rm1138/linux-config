@@ -63,18 +63,17 @@
 
     # Defines width in pixels of frame around the notification window.
     # Set to 0 to disable.
-    frame_width = 2
+    frame_width = 1
 
     # Defines color of the frame around the notification window.
-    frame_color = "#333"
-
+    frame_color = "#c5c8c6"
     # Define a color for the separator.
     # possible values are:
     #  * auto: dunst tries to find a color fitting to the background;
     #  * foreground: use the same color as the foreground;
     #  * frame: use the same color as the frame;
     #  * anything else will be interpreted as a X color.
-    separator_color = "#333"
+    separator_color = "#c5c8c6"
 
     # Sort messages by urgency.
     sort = yes
@@ -156,7 +155,7 @@
     hide_duplicate_count = false
 
     # Display indicators for URLs (U) and actions (A).
-    show_indicators = yes
+    show_indicators = no
 
     ### Icons ###
 
@@ -253,21 +252,33 @@
 
 [urgency_low]
     msg_urgency = low
-    background = "#222222"
-    foreground = "#d5c4a1"
     timeout = 15s
 
 [urgency_normal]
     msg_urgency = normal
-    background = "#3c3836"
-    foreground = "#ffffff"
     timeout = 15s
 
 [urgency_critical]
     msg_urgency = critical
-    background = "#fb4934"
-    foreground = "#ebdbb2"
     timeout = 30s
+
+
+
+[base16_low]
+    msg_urgency = low
+    background = "#282a2e"
+    foreground = "#969896"
+
+[base16_normal]
+    msg_urgency = normal
+    background = "#373b41"
+    foreground = "#c5c8c6"
+
+[base16_critical]
+    msg_urgency = critical
+    background = "#cc6666"
+    foreground = "#e0e0e0"
+
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.

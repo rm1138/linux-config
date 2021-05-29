@@ -3,13 +3,17 @@
     "height": 28,
     "modules-left": ["clock", "sway/workspaces", "sway/mode", "sway/window"],
     "modules-center": [],
-    "modules-right": [ "network", "cpu", "memory", "temperature", "battery", "pulseaudio", "tray", "custom/weather", "idle_inhibitor"],
+    "modules-right": [ "network", "cpu", "memory", "temperature", "battery", "pulseaudio", "tray", "custom/weather", "idle_inhibitor", "custom/connect-wm4"],
     "custom/weather": {
-	"format": "{}",
-	"tooltip": true,
-	"interval": 3600,
-	"exec": "$HOME/.config/waybar/weather.py",
+        "format": "{}",
+        "tooltip": true,
+        "interval": 3600,
+        "exec": "$HOME/.config/waybar/weather.py",
         "return-type": "json"
+    },
+    "custom/connect-wm4": {
+        "format": "  ",
+        "on-click": "bluetoothctl power on && bluetoothctl connect '94:DB:56:70:C8:69'"
     },
     "sway/workspaces": {
         "disable-scroll": true,

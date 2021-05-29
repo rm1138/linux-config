@@ -23,6 +23,15 @@ Plug 'plasticboy/vim-markdown'
 call plug#end()
 
 
+if exists('+termguicolors')
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
+" let base16colorspace=256
+colorscheme base16-tomorrow-night-eighties
+
 
 " rust
 let g:rustfmt_autosave = 1
@@ -88,7 +97,22 @@ endif
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-colorscheme base16-gruvbox-dark-hard
+
+" fzf
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
+
+
+map <F2> :!ls<CR>:e
+" clipboard
+" system clipboard
+" nmap <c-c> "+y
+" vmap <c-c> "+y
+" nmap <c-v> "+p
+" inoremap <c-v> <c-r>+
+" cnoremap <c-v> <c-r>+
+" use <c-r> to insert original character without triggering things like auto-pairs
+" inoremap <c-r> <c-v>
+
 
 syntax enable
 
@@ -98,3 +122,8 @@ set relativenumber
 set nowrap
 set autoindent
 
+set tabstop=2
+set shiftwidth=2
+set expandtab
+
+hi Normal ctermbg=None guibg=None

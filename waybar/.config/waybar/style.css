@@ -1,3 +1,5 @@
+@import "/home/ricky/.config/waybar/theme.css";
+
 * {
   border: none;
   border-radius: 0;
@@ -6,16 +8,17 @@
 }
 
 window#waybar {
-  border-bottom: 1px solid #484848;
+  border-bottom: 1px solid @base01;
+  background-color: rgba(29, 31, 33, 0.85);
 }
 
 #clock, #workspace, #mode, #, #network, #pulseaudio, #cpu, #memory, #battery, #tray, #temperature, #custom-weather {
   padding: 0 10px 0 10px;
-  border-right: 0px solid #484848;
+  border-right: 0px solid @base03;
 }
 
 #clock {
-  border-right: 1px solid #484848;
+  border-right: 1px solid @base03;
 }
 
 #window {
@@ -28,34 +31,34 @@ window#waybar {
 }
 
 #tray {
-  border-left: 1px solid #484848;
+  border-left: 1px solid @base03;
   padding-right: 5px;
 }
 
 #network.disconnected {
-  background-color: #484848;
+  background-color: @base08;
 }
 
 #temperature.critical {
-  background-color: #eb4d4b;
+  background-color: @base0A;
 }
 
 
 #battery.charging {
-  background-color: #98ddca;
+  background-color: @base0C;
   color: #212121;
 }	
 
 
 @keyframes blink {
-    to {
-        background-color: #000000;
-	color: #ffffff;
-    }
+  to {
+    background-color: @base00;
+    color: #ffffff;
+  }
 }
 
 #battery.critical:not(.charging) {
-    background-color: #f53c3c;
+    background-color: @base08;
     color: #ffffff;
     animation-name: blink;
     animation-duration: 1s;
@@ -65,7 +68,7 @@ window#waybar {
 }
 
 #battery.warning:not(.charging) {
-    background-color: #ffd3b4;
+    background-color: @base09;
     color: #ffffff;
     animation-name: blink;
     animation-duration: 0.5s;
@@ -80,14 +83,15 @@ window#waybar {
 }
 
 #workspaces button.focused {
-  background-color: #484848;
+  color: @base00;
+  background-color: @base07;
 }
 
 #workspaces button.urgent {
-  color: #000000;
-  background-color: #ffffff;
+  color: @base00;
+  background-color: @base07;
   animation-name: blink;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate;
