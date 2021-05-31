@@ -20,7 +20,7 @@ set $term alacritty
 # on the original workspace that the command was run on.
 set $menu swaymsg exec yofi
 set $bg ~/.config/sway/wallpaper.jpg
-set $lock swaylock --screenshots --ignore-empty-password --effect-blur 5x3 --clock --indicator --indicator-radius 100 --datestr "%a %b %Y" --ring-color 8abeb7 --text-color ffffff --bs-hl-color 81a2be --key-hl-color 81a2be
+set $lock swaylock --screenshots --ignore-empty-password --effect-blur 5x3 --clock --indicator --indicator-radius 100 --datestr \"%a %b %Y\" --ring-color 8abeb7 --text-color ffffff --bs-hl-color 81a2be --key-hl-color 81a2be
 
 ### Output configuration
 #
@@ -30,7 +30,7 @@ output * bg $bg fill
 # Hide the border
 default_border pixel 1
 
-gaps inner 5
+gaps inner 10
 
 #focus_follows_mouse no
 
@@ -46,9 +46,10 @@ gaps inner 5
 # Example configuration:
 #
 exec swayidle -w \
-         timeout 600 '$lock' \
-         timeout 1200 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         before-sleep '$lock'
+       timeout 120 'brightnessctl -s && brightnessctl set 10%' resume 'brightnessctl -r' \
+       timeout 300 '$lock' \
+       timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+       before-sleep '$lock'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -242,14 +243,14 @@ set $laptop eDP-1
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
 
-# multiple screen control
-exec_always killall -q kanshi; kanshi
-
 # lid screen control
 exec_always ~/.config/sway/screen_reload.sh
 
+# multiple screen control
+exec_always pkill kanshi; exec kanshi
+
 # apply gtk theme
-exec_always ~/.config/sway/config_gtk_theme.sh
+exec ~/.config/sway/config_gtk_theme.sh
 
 # notification
 exec dunst
@@ -265,15 +266,13 @@ exec discord --start-minimized
 # auto tiling
 exec autotiling-rs
 
-for_window [app_id="ulauncher"] border none
-
 include /etc/sway/config.d/*
 include ~/.config/sway/config.d/*.conf
 
 
 # Basic color configuration using the Base16 variables for windows and borders.
 # Property Name         Border  BG      Text    Indicator Child Border
-client.focused          $base05 $base0D $base00 $base01 $base03
+client.focused          $base05 $base03 $base00 $base01 $base02
 client.focused_inactive $base01 $base01 $base05 $base01 $base01
 client.unfocused        $base01 $base00 $base05 $base01 $base01
 client.urgent           $base08 $base08 $base00 $base08 $base08

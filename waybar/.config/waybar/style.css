@@ -9,7 +9,7 @@
 
 window#waybar {
   border-bottom: 1px solid @base01;
-  background-color: rgba(29, 31, 33, 0.85);
+  background-color: rgba(29, 31, 33, 0.80);
 }
 
 #clock, #workspace, #mode, #, #network, #pulseaudio, #cpu, #memory, #battery, #tray, #temperature, #custom-weather {
@@ -31,7 +31,7 @@ window#waybar {
 }
 
 #tray {
-  border-left: 1px solid @base03;
+  border-left: 1px solid @base02;
   padding-right: 5px;
 }
 

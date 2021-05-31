@@ -1,5 +1,7 @@
 call plug#begin()
 
+Plug 'easymotion/vim-easymotion'
+
 Plug 'rust-lang/rust.vim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -20,8 +22,13 @@ Plug 'rust-lang/rust.vim'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
+
 call plug#end()
 
+" define Leader
+" https://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
+
+let mapleader = "\<Space>"
 
 if exists('+termguicolors')
   let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
@@ -80,8 +87,6 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
 
 " coc ==========================^
 
@@ -101,18 +106,62 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " fzf
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 
+" Easymotion
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Turn on case-insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
 
 map <F2> :!ls<CR>:e
 " clipboard
 " system clipboard
-" nmap <c-c> "+y
-" vmap <c-c> "+y
-" nmap <c-v> "+p
-" inoremap <c-v> <c-r>+
-" cnoremap <c-v> <c-r>+
-" use <c-r> to insert original character without triggering things like auto-pairs
-" inoremap <c-r> <c-v>
+noremap <Leader>w :w<CR>
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
 
+
+
+" No arrow keys --- force yourself to use the home row
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+
+" Left and right can switch buffers
+nnoremap <left> :bp<CR>
+nnoremap <right> :bn<CR>
+
+" Move by line
+nnoremap j gj
+nnoremap k gk
+
+
+vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
+    \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
+omap s :normal vs<CR>
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <Leader>rn <Plug>(coc-rename)
+
+" Sane splits
+set splitright
+set splitbelow
 
 syntax enable
 

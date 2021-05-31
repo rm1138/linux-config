@@ -7,7 +7,7 @@ profile "internal" {
 
 # Home
 profile "home" {
-        output "Dell Inc. DELL U2913WM 5YD8C31H228L" mode 2560x1080 position 0,0
+  output "Dell Inc. DELL U2913WM 5YD8C31H228L" mode 2560x1080 position 0,0
 	output "Unknown 0x062C 0x00000000" enable position 2560,0 scale 1.2
 	#output "Dell Inc. DELL U2913WM 5YD8C31H228L" disable 
 }
@@ -18,4 +18,13 @@ profile "office" {
 	output "Unknown 0x062C 0x00000000" enable position 0,150 scale 1
 }
 
+profile "other-hdmi" {
+	output HDMI-A-1 mode 1920x1080 position 1920,0 scale 1
+	output "Unknown 0x062C 0x00000000" enable position 0,0 scale 1
+}
+
+profile "other-dp" {
+	output DP-1 mode 1920x1080 position 1920,0 scale 1
+	output "Unknown 0x062C 0x00000000" enable position 0,0 scale 1
+}
 
