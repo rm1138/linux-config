@@ -245,6 +245,7 @@ bindswitch --reload --locked lid:off output $laptop enable
 
 # lid screen control
 exec_always ~/.config/sway/screen_reload.sh
+exec ~/.config/sway/inactive-windows-transparency.py
 
 # multiple screen control
 exec_always pkill kanshi; exec kanshi
@@ -269,6 +270,9 @@ exec autotiling-rs
 include /etc/sway/config.d/*
 include ~/.config/sway/config.d/*.conf
 
+set $opacity 0.9
+for_window [class=".*"] opacity $opacity
+for_window [app_id=".*"] opacity $opacity
 
 # Basic color configuration using the Base16 variables for windows and borders.
 # Property Name         Border  BG      Text    Indicator Child Border

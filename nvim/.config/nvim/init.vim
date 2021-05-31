@@ -11,6 +11,9 @@ Plug 'chriskempson/base16-vim'
 " JS TS
 Plug 'dense-analysis/ale'
 
+" Git 
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -51,6 +54,9 @@ let g:ale_disable_lsp = 1
 let g:ale_fix_on_save = 1
 let g:ale_fixers = ['prettier', 'eslint']
 
+" netrw hide dotfiles
+let ghregex='\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_list_hide=ghregex
 
 " coc ======================V
 set updatetime=300
@@ -120,7 +126,12 @@ let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
-map <F2> :!ls<CR>:e
+
+" back to netrw with <Leader> + b
+map <Leader>b :e %:h<CR>
+map <Leader>f :GFiles<CR>
+ 
+
 " clipboard
 " system clipboard
 noremap <Leader>w :w<CR>
