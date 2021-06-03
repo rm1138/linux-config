@@ -8,8 +8,7 @@
 }
 
 window#waybar {
-  border-bottom: 1px solid @base01;
-  background-color: rgba(29, 31, 33, 0.80);
+  background-color: rgba(29, 31, 33, 0.60);
 }
 
 #clock, #workspace, #mode, #, #network, #pulseaudio, #cpu, #memory, #battery, #tray, #temperature, #custom-weather {
@@ -31,7 +30,7 @@ window#waybar {
 }
 
 #tray {
-  border-left: 1px solid @base02;
+  border-left: 1px solid @base04;
   padding-right: 5px;
 }
 
@@ -41,6 +40,7 @@ window#waybar {
 
 #temperature.critical {
   background-color: @base0A;
+  color: @base00;
 }
 
 
@@ -84,7 +84,7 @@ window#waybar {
 
 #workspaces button.focused {
   color: @base00;
-  background-color: @base07;
+  background-color: @base04;
 }
 
 #workspaces button.urgent {

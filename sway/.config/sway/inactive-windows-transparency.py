@@ -24,7 +24,7 @@ def on_window_focus(inactive_opacity, ipc, event):
     workspace = focused_workspace.workspace().num
 
     if focused.id != prev_focused.id:  # https://github.com/swaywm/sway/issues/2859
-        focused.command("opacity 1")
+        focused.command("opacity 0.98")
         #if workspace == prev_workspace:
         prev_focused.command("opacity " + inactive_opacity)
         prev_focused = focused
@@ -40,7 +40,7 @@ def remove_opacity(ipc):
 
 
 if __name__ == "__main__":
-    transparency_val = "0.85"
+    transparency_val = "0.90"
 
     parser = argparse.ArgumentParser(
         description="This script allows you to set the transparency of unfocused windows in sway."

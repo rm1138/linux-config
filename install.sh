@@ -63,7 +63,8 @@ paru -S --noconfirm --needed \
 	otf-font-awesome \
 	ttf-font-awesome \
   autotiling-rs-git \
-  yofi-git
+  yofi-git \
+  autojump-rs
 
 sudo systemctl enable gdm.service -f
 

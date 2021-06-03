@@ -24,7 +24,7 @@ Plug 'stephpy/vim-yaml'
 Plug 'rust-lang/rust.vim'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-
+Plug 'peitalin/vim-jsx-typescript'
 
 call plug#end()
 
@@ -58,7 +58,11 @@ let g:ale_fixers = ['prettier', 'eslint']
 let ghregex='\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_list_hide=ghregex
 
+
+" set filetypes as typescriptreact
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 " coc ======================V
+
 set updatetime=300
 " Use <c-space> to trigger completion.
 if has('nvim')
@@ -130,6 +134,7 @@ map <Leader>k <Plug>(easymotion-k)
 " back to netrw with <Leader> + b
 map <Leader>b :e %:h<CR>
 map <Leader>f :GFiles<CR>
+map <Leader>t :Windows<CR>
  
 
 " clipboard
@@ -173,6 +178,8 @@ nmap <Leader>rn <Plug>(coc-rename)
 " Sane splits
 set splitright
 set splitbelow
+
+set wildmenu
 
 syntax enable
 
