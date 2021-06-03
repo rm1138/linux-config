@@ -79,7 +79,8 @@ exec swayidle -w \
     bindsym $mod+Return exec $term
 
 
-    bindsym $mod+Backspace exec `swaymsg '[title=".*Firefox Developer Edition"] focus' || firefox-developer-edition`
+    bindsym $mod+Backspace exec `swaymsg 'mark --replace last_focus' && swaymsg '[title=".*Firefox Developer Edition"] focus' || firefox-developer-edition`
+    bindsym $mod+Shift+Backspace exec `swaymsg '[con_mark="last_focus"] focus'`
 
     # Kill focused window
     bindsym $mod+q kill
