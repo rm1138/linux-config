@@ -79,8 +79,9 @@ exec swayidle -w \
     bindsym $mod+Return exec $term
 
 
-    bindsym $mod+Backspace exec `swaymsg 'mark --replace last_focus' && swaymsg '[title=".*Firefox Developer Edition"] focus' || firefox-developer-edition`
-    bindsym $mod+Shift+Backspace exec `swaymsg '[con_mark="last_focus"] focus'`
+    bindsym $mod+Backspace exec \
+    (swaymsg -t get_tree | jq -r '..|try select(.focused == true)' | jq 'select(.name|test("Firefox"))' -e && swaymsg '[con_mark="last_focus"] focus') || \
+    ((swaymsg 'mark --replace last_focus' && swaymsg '[title=".*Firefox Developer Edition"] focus') || firefox-developer-edition)
 
     # Kill focused window
     bindsym $mod+q kill
@@ -155,7 +156,7 @@ exec swayidle -w \
     # alt-tab like behaviour
     bindsym $mod+tab focus output right
     #bindsym $mod+Shift+tab focus output left
-    workspace_auto_back_and_forth yes
+    #workspace_auto_back_and_forth yes
 #
 # Layout stuff:
 #
