@@ -127,3 +127,5 @@ source /usr/share/fzf/completion.zsh
 [[ ! -f ~/linux-config/p10k/.p10k.zsh ]] || source ~/linux-config/p10k/.p10k.zsh
 alias connect-wm4='bluetoothctl power on && bluetoothctl connect "94:DB:56:70:C8:69"'
 alias cat=bat
+
+source <(argocd completion zsh)

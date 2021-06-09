@@ -100,7 +100,6 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " coc ==========================^
 
-
 " coc suggestion list and auto import
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
@@ -135,11 +134,12 @@ map <Leader>k <Plug>(easymotion-k)
 map <Leader>b :e %:h<CR>
 map <Leader>f :GFiles<CR>
 map <Leader>t :Windows<CR>
- 
+noremap <Leader>w :w<CR>
+noremap <Leader>q :q<CR>
+
 
 " clipboard
 " system clipboard
-noremap <Leader>w :w<CR>
 vmap <Leader>y "+y
 vmap <Leader>d "+d
 nmap <Leader>p "+p
