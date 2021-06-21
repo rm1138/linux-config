@@ -1,9 +1,14 @@
 {
     "position": "top",
-    "height": 28,
-    "modules-left": ["clock", "sway/workspaces", "sway/mode", "sway/window"],
-    "modules-center": [],
-    "modules-right": [ "network", "cpu", "memory", "temperature", "battery", "pulseaudio", "tray", "custom/weather", "idle_inhibitor", "custom/connect-wm4"],
+    "height": 25,
+    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-center": ["clock"],
+    "modules-right": [ "network", "cpu", "memory", "temperature", "battery", "pulseaudio", "tray", "idle_inhibitor", "custom/connect-wm4", "custom/weather"],
+    "custom/fan": {
+      "interval": 1,
+      "exec": "awk '/^speed/ {print $2}' /proc/acpi/ibm/fan",
+      "format": " {}RPM"
+    },
     "custom/weather": {
         "format": "{}",
         "tooltip": true,
@@ -17,6 +22,7 @@
     },
     "sway/workspaces": {
         "disable-scroll": true,
+        "disable-click": true,
         "all-outputs": false,
     },
     "sway/mode": {
@@ -39,13 +45,13 @@
         "format-alt": "{:%Y-%m-%d %H:%M:%S}"
     },
     "cpu": {
-        "format": " {usage}%",
+        "format": " {usage:2}% ({load:0.2f})",
         "tooltip": false,
-        "interval": 3
+        "interval": 1
     },
     "memory": {
         "format": " {used:0.1f}GiB",
-        "interval": 3
+        "interval": 1
     },
     "temperature": {
         //"thermal-zone": 3,
@@ -54,7 +60,7 @@
         "critical-threshold": 75,
         "format-critical": " {temperatureC}°C",
         "format": " {temperatureC}°C",
-        "interval": 3
+        "interval": 1
     },
     "backlight": {
         // "device": "acpi_video1",
@@ -76,13 +82,13 @@
         "format-icons": ["", "", "", "", ""]
     },
     "network": {
-        "format-wifi": "   {bandwidthDownBits}  {bandwidthUpBits}",
+        "format-wifi": " {signalStrength:2}%  {bandwidthDownBits}  {bandwidthUpBits}",
         "format-ethernet": "   {bandwidthDownBits}  {bandwidthUpBits}",
         "format-linked": "",
         "format-disconnected": "",
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
-        "interval": 3
+        "interval": 1
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float

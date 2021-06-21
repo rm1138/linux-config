@@ -101,3 +101,14 @@ git config --global user.email "rm1138@gmail.com"
 git config --global pull.rebase true
 
 echo 85 | sudo tee /sys/class/power_supply/BAT0/charge_stop_threshold
+
+
+# prevent docker expose port to public
+echo "{ "iptables": false }" | sudo tee -a /etc/docker/daemon.json > /dev/null
+
+# ufw config
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo allow ssh
+sudo enable
+

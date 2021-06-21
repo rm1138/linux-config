@@ -3,35 +3,38 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: "siji", "noto-fonts-emoji";
+  font-family: "noto-fonts-emoji";
   min-height: 0;
+  color: @base06;
 }
 
 window#waybar {
   background-color: rgba(29, 31, 33, 0.60);
 }
 
-#clock, #workspace, #mode, #, #network, #pulseaudio, #cpu, #memory, #battery, #tray, #temperature, #custom-weather {
-  padding: 0 10px 0 10px;
+#clock, #workspace, #mode, #, #network, #pulseaudio, #cpu, #memory, #battery, #tray, #temperature, #custom-weather, #custom-fan {
+  padding: 0 5px;
   border-right: 0px solid @base03;
 }
 
 #clock {
-  border-right: 1px solid @base03;
+  font-size: 100%;
+  padding: 0 5px;
+  font-weight: bold;
 }
 
 #window {
-  padding: 0 20px 0 20px;
+  padding: 0 20px;
 }
 
 #custom-weather {
-  padding-top: 3px;
+  padding-top: 4px;
   padding-left: 0;
 }
 
 #tray {
-  border-left: 1px solid @base04;
-  padding-right: 5px;
+  border-left: 1px solid @base02;
+  padding: 0 5px;
 }
 
 #network.disconnected {
@@ -80,11 +83,14 @@ window#waybar {
 
 #workspaces button {
   padding: 0 5px 0 5px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
 }
 
 #workspaces button.focused {
-  color: @base00;
+ /* color: @base00;
   background-color: @base04;
+*/
+  border-bottom: 1px solid @base04;
 }
 
 #workspaces button.urgent {

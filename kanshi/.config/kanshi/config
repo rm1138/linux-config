@@ -4,18 +4,17 @@ profile "internal" {
 	output "Unknown 0x062C 0x00000000" enable scale 1
 }
 
-
 # Home
 profile "home" {
   output "Dell Inc. DELL U2913WM 5YD8C31H228L" mode 2560x1080 position 0,0
-	output "Unknown 0x062C 0x00000000" enable position 2560,0 scale 1.2
+	output "Unknown 0x062C 0x00000000" enable position 2560,0 scale 1
 	#output "Dell Inc. DELL U2913WM 5YD8C31H228L" disable 
 }
 
 # Spaceship office ASUS Mon
 profile "office" {
 	output "Ancor Communications Inc ASUS PB279 0x00006F9" mode 2560x1440 position 1920,0 scale 1
-	output "Unknown 0x062C 0x00000000" enable position 0,150 scale 1
+	output "Unknown 0x062C 0x00000000" enable position 0,480 scale 1
 }
 
 profile "other-hdmi" {
