@@ -3,12 +3,7 @@
     "height": 25,
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["clock"],
-    "modules-right": [ "network", "cpu", "memory", "temperature", "battery", "pulseaudio", "tray", "idle_inhibitor", "custom/connect-wm4", "custom/weather"],
-    "custom/fan": {
-      "interval": 1,
-      "exec": "awk '/^speed/ {print $2}' /proc/acpi/ibm/fan",
-      "format": " {}RPM"
-    },
+    "modules-right": [ "network", "cpu", "memory", "temperature", "battery", "pulseaudio", "idle_inhibitor", "custom/connect-wm4", "tray"],
     "custom/weather": {
         "format": "{}",
         "tooltip": true,
@@ -17,7 +12,7 @@
         "return-type": "json"
     },
     "custom/connect-wm4": {
-        "format": "  ",
+        "format": "",
         "on-click": "bluetoothctl power on && bluetoothctl connect '94:DB:56:70:C8:69'"
     },
     "sway/workspaces": {
@@ -36,16 +31,16 @@
         }
     },
     "tray": {
-        //"icon-size": 21,
         "spacing": 5
     },
     "clock": {
-        "format": "{:%H:%M}",
+        "format": "{:%H:%M:%S}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d %H:%M:%S}"
+        "format-alt": "{:%Y-%m-%d %H:%M:%S}",
+        "interval": 1
     },
     "cpu": {
-        "format": " {usage:2}% ({load:0.2f})",
+        "format": " {usage}% ({load:0.2f})",
         "tooltip": false,
         "interval": 1
     },
@@ -70,20 +65,21 @@
     "battery": {
         "states": {
           "normal": 84,
-          "warning": 30,
-          "critical": 15,
+          "warning": 50,
+          "critical": 30,
         },
         "full-at": 85,
-        "interval": 60,
-        "format-charging": " {capacity}%",
+        "interval": 10,
+        "format-time": "{H:02}:{M:02}",
+        "format-charging": " {power:.0}W {time}",
         "format-plugged": "",
         "format": "{icon} {capacity}%",
-        "format-alt": "{time}",
+        "format-alt": "{icon} {power:.0}W {time}",
         "format-icons": ["", "", "", "", ""]
     },
     "network": {
-        "format-wifi": " {signalStrength:2}%  {bandwidthDownBits}  {bandwidthUpBits}",
-        "format-ethernet": "   {bandwidthDownBits}  {bandwidthUpBits}",
+        "format-wifi": "  {bandwidthDownBits}  {bandwidthUpBits}",
+        "format-ethernet": "  {bandwidthDownBits}  {bandwidthUpBits}",
         "format-linked": "",
         "format-disconnected": "",
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
@@ -95,7 +91,7 @@
         "format": "{icon} {volume}% {format_source}",
         "format-bluetooth": " {volume}% {format_source}",
         "format-bluetooth-muted": "  {icon}  {format_source}",
-        "format-muted": " {format_source}",
+        "format-muted": "{format_source}",
         "format-source": " {volume}%",
         "format-source-muted": "",
         //"",

@@ -260,6 +260,8 @@ bindswitch --reload --locked lid:off output $laptop enable
 
 
 for_window [app_id="pavucontrol"] floating enable
+for_window [app_id="zenity"] floating enable
+for_window [class="Enpass"] floating enable
 
 # launch gnome authentication agent
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1

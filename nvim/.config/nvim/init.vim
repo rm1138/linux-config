@@ -26,6 +26,8 @@ Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'leafgarland/typescript-vim'
+Plug 'pangloss/vim-javascript'
+Plug 'leafOfTree/vim-svelte-plugin'
 
 " nerdtree
 Plug 'preservim/nerdtree'
@@ -58,6 +60,9 @@ let g:ale_disable_lsp = 1
 let g:ale_fix_on_save = 1
 let g:ale_fixers = ['prettier', 'eslint']
 
+" svelte
+let g:vim_svelte_plugin_load_full_syntax = 1
+let g:vim_svelte_plugin_use_typescript = 1
 " netrw hide dotfiles
 let ghregex='\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_list_hide=ghregex

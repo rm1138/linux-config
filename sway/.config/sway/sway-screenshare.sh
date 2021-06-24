@@ -2,7 +2,7 @@
 set -x 
 if ! lsmod | grep v4l2loopback > /dev/null; then
 	echo "Adding v42loopback module to kernel"
-	sudo modprobe v4l2loopback
+	gksu modprobe v4l2loopback
 fi
 
 geometry(){

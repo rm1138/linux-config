@@ -2,39 +2,45 @@
 
 * {
   border: none;
-  border-radius: 0;
-  font-family: "noto-fonts-emoji";
+  font-family: "hack";
   min-height: 0;
+  border-radius: 0;
   color: @base06;
 }
 
-window#waybar {
-  background-color: rgba(29, 31, 33, 0.60);
+#window {
+  border-radius: 0;
+  margin: 0px;
+  background-color: rgba(29, 31, 33, 0.80);
 }
 
-#clock, #workspace, #mode, #, #network, #pulseaudio, #cpu, #memory, #battery, #tray, #temperature, #custom-weather, #custom-fan {
+#clock, #workspace, #mode, #, #network, #pulseaudio, #cpu, #memory, #battery, #tray, #temperature {
   padding: 0 5px;
-  border-right: 0px solid @base03;
+  /*border-right: 1px solid @base03;*/
+}
+
+#idle_inhibitor, #custom-connect-wm4, #custom-weather {
+  padding: 0 5px;
 }
 
 #clock {
-  font-size: 100%;
+  font-size: 110%;
   padding: 0 5px;
   font-weight: bold;
 }
 
 #window {
-  padding: 0 20px;
+  padding: 0 200px;
 }
 
 #custom-weather {
   padding-top: 4px;
-  padding-left: 0;
 }
 
 #tray {
   border-left: 1px solid @base02;
-  padding: 0 5px;
+  margin-left: 5px;
+  padding-left: 5px;
 }
 
 #network.disconnected {
@@ -42,13 +48,13 @@ window#waybar {
 }
 
 #temperature.critical {
-  background-color: @base0A;
+  background-color: @base09;
   color: @base00;
 }
 
 
 #battery.charging {
-  background-color: @base0C;
+  background-color: @base0B;
   color: #212121;
 }	
 
@@ -83,14 +89,14 @@ window#waybar {
 
 #workspaces button {
   padding: 0 5px 0 5px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0);
+  border-bottom: 2px solid rgba(0, 0, 0, 0);
 }
 
 #workspaces button.focused {
  /* color: @base00;
   background-color: @base04;
 */
-  border-bottom: 1px solid @base04;
+  border-bottom: 2px solid @base0A;
 }
 
 #workspaces button.urgent {
