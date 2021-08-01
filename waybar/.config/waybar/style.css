@@ -6,17 +6,16 @@
   min-height: 0;
   border-radius: 0;
   color: @base06;
+  background-color: rgba(29, 31, 33, 1.0);
 }
 
-#window {
-  border-radius: 0;
-  margin: 0px;
-  background-color: rgba(29, 31, 33, 0.80);
+window#waybar {
+  background-color: rgba(29, 31, 33, 0.8);
+  padding: 5px 10px;
 }
 
-#clock, #workspace, #mode, #, #network, #pulseaudio, #cpu, #memory, #battery, #tray, #temperature {
-  padding: 0 5px;
-  /*border-right: 1px solid @base03;*/
+#clock, #workspaces, #mode, #, #network, #pulseaudio, #cpu, #memory, #battery, #tray, #temperature {
+  padding: 0 10px;
 }
 
 #idle_inhibitor, #custom-connect-wm4, #custom-weather {
@@ -24,24 +23,40 @@
 }
 
 #clock {
-  font-size: 110%;
-  padding: 0 5px;
   font-weight: bold;
 }
 
 #window {
   padding: 0 200px;
 }
+/*
+#network {
+  border-top: 1px solid @base08;
+}
+#cpu {
+  border-top: 1px solid @base09;
+}
+#memory {
+  border-top: 1px solid @base0A;
+}
+#temperature {
+  border-top: 1px solid @base0B;
+}
+#battery {
+  border-top: 1px solid @base0C;
+}
+#pulseaudio {
+  border-top: 1px solid @base0D;
+}
+#tray {
+  border-top: 1px solid @base0E;
+}*/
+
 
 #custom-weather {
   padding-top: 4px;
 }
 
-#tray {
-  border-left: 1px solid @base02;
-  margin-left: 5px;
-  padding-left: 5px;
-}
 
 #network.disconnected {
   background-color: @base08;
@@ -63,6 +78,25 @@
   to {
     background-color: @base00;
     color: #ffffff;
+  }
+}
+
+
+@keyframes select {
+  from {
+    border-bottom: 2px solid rgba(0, 0, 0, 0);
+  }
+  to {
+    border-bottom: 2px solid @base0A;
+  }
+}
+
+@keyframes unselect {
+  from {
+    border-bottom: 2px solid @base0A;
+  }
+  to {
+    border-bottom: 2px solid rgba(0, 0, 0, 0);
   }
 }
 
@@ -89,14 +123,21 @@
 
 #workspaces button {
   padding: 0 5px 0 5px;
+  margin: 0 2px 0 2px;
   border-bottom: 2px solid rgba(0, 0, 0, 0);
+  animation-name: unselect;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
 }
 
 #workspaces button.focused {
- /* color: @base00;
-  background-color: @base04;
-*/
-  border-bottom: 2px solid @base0A;
+  animation-name: select;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+  animation-iteration-count: 1;
+  animation-fill-mode: both;
 }
 
 #workspaces button.urgent {

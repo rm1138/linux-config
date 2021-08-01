@@ -31,7 +31,7 @@ output * bg $bg fill
 default_border none
 
 gaps inner 5
-gaps outer 5
+gaps outer 0
 
 focus_follows_mouse always
 
@@ -47,6 +47,7 @@ mouse_warping container
 # Example configuration:
 #
 exec swayidle -w \
+       timeout 120 'brightnessctl --device=tpacpi::kbd_backlight -s && brightnessctl --device=tpacpi::kbd_backlight s 0' resume 'brightnessctl --device=tpacpi::kbd_backlight -r' \
        timeout 120 'brightnessctl -s && brightnessctl set 10%' resume 'brightnessctl -r' \
        timeout 300 '$lock' \
        timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
@@ -85,11 +86,6 @@ exec swayidle -w \
 #
     # Start a terminal
     bindsym $mod+Return exec $term
-
-
-    bindsym $mod+Backspace exec \
-    (swaymsg -t get_tree | jq -r '..|try select(.focused == true)' | jq 'select(.name|test("Firefox"))' -e && swaymsg '[con_mark="last_focus"] focus') || \
-    ((swaymsg 'mark --replace last_focus' && swaymsg '[title=".*Firefox Developer Edition"] focus') || firefox-developer-edition)
 
     # Kill focused window
     bindsym $mod+q kill
@@ -243,7 +239,8 @@ bindsym $mod+alt+o exec "pacmd set-card-profile bluez_card.94_DB_56_70_C8_69 a2d
 bindsym $mod+alt+p exec "pacmd set-card-profile bluez_card.94_DB_56_70_C8_69 headset_head_unit"
 bindsym $mod+shift+b exec "killall -SIGUSR1 waybar"
 
-
+    
+bindsym $mod+Backspace exec ~/.config/sway/focus-firefox.sh
 bindsym $mod+Shift+s exec ~/.config/sway/sway-screenshare.sh
 # capture all screens to clipboard    
 bindsym Shift+Print exec (grim - | wl-copy) && notify-send "captured"
@@ -267,10 +264,11 @@ for_window [class="Enpass"] floating enable
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # lid screen control
 exec_always ~/.config/sway/screen_reload.sh
+
 exec ~/.config/sway/inactive-windows-transparency.py
 
 # multiple screen control
-exec_always pkill kanshi; exec kanshi
+exec_always pkill kanshi; kanshi
 
 # apply gtk theme
 exec ~/.config/sway/config_gtk_theme.sh

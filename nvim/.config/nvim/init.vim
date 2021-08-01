@@ -13,7 +13,10 @@ Plug 'dense-analysis/ale'
 
 " Git 
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
+
+Plug 'preservim/nerdtree'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -27,12 +30,9 @@ Plug 'plasticboy/vim-markdown'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript'
-Plug 'leafOfTree/vim-svelte-plugin'
-
-" nerdtree
-Plug 'preservim/nerdtree'
-
 call plug#end()
+
+set updatetime=100
 
 " define Leader
 " https://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
@@ -72,7 +72,7 @@ let g:netrw_list_hide=ghregex
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 " coc ======================V
 
-set updatetime=300
+
 " Use <c-space> to trigger completion.
 if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()
@@ -183,14 +183,7 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <Leader>rn <Plug>(coc-rename)
-
-
-" nerdtree
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
-
+nnoremap <leader>o <C-o>
 
 " Sane splits
 set splitright
@@ -210,4 +203,13 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
+set foldmethod=syntax
+set foldlevel=99
+
 hi Normal ctermbg=None guibg=None
+
+"function! GitStatus()
+"  let [a,m,r] = GitGutterGetHunkSummary()
+"  return printf('+%d ~%d -%d', a, m, r)
+"endfunction
+"set statusline+=%{GitStatus()}

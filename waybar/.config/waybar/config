@@ -1,6 +1,6 @@
 {
     "position": "top",
-    "height": 25,
+    "height": 28,
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["clock"],
     "modules-right": [ "network", "cpu", "memory", "temperature", "battery", "pulseaudio", "idle_inhibitor", "custom/connect-wm4", "tray"],
