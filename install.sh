@@ -1,5 +1,4 @@
 #!/bin/bash
-
 RED='\033[0;31m'
 GREEN='\033[38;5;46m'
 NC='\033[0m'
@@ -11,15 +10,12 @@ sudo pacman -S --needed --noconfirm \
         firefox-developer-edition chromium \
        	alacritty \
 	zsh \
-	picom \
 	rust \
 	telegram-desktop \
 	nodejs yarn \
 	openssh \
 	neovim tmux bmon htop curl wget p7zip jq tree \
 	stow \
-	feh \
-	ulauncher \
 	fcitx \
 	fcitx-table-extra \
 	fcitx-configtool \
@@ -27,7 +23,6 @@ sudo pacman -S --needed --noconfirm \
 	pulsemixer brightnessctl \
 	mpv \
 	wmname \
-	gdm \
 	fzf
 
 if ! command -v paru &> /dev/null
@@ -48,14 +43,13 @@ paru -S --noconfirm --needed \
        	visual-studio-code-bin \
        	slack-desktop \
 	enpass-bin \
-	auto-cpufreq \
 	bluez-utils \
 	fcitx-qt5 \
 	libinput-gestures xdotool wmctrl \
 	insomnia-bin \
 	1password \
 	dunst-git \
-	sway-git \
+	sway \
 	swaylock \
 	swayidle \
 	kanshi \
@@ -65,8 +59,6 @@ paru -S --noconfirm --needed \
   autotiling-rs-git \
   yofi-git \
   autojump-rs
-
-sudo systemctl enable gdm.service -f
 
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
@@ -81,12 +73,14 @@ echo -e "${GREEN}Package Installation Completed!!${NC}"
 stow zsh
 stow p10k
 stow dunst
-stow ulauncher
 stow mpv
 stow sway
 stow waybar
 stow kanshi
-stow libinput-gestures
+stow alacritty
+stow nvim
+stow fcitx
+stow yofi
 
 echo -e "${GREEN}Configuration files linked${NC}"
 sudo systemctl enable auto-cpufreq
@@ -99,8 +93,6 @@ sudo usermod -aG docker $USER
 git config --global user.name "Ricky Lam"
 git config --global user.email "rm1138@gmail.com"
 git config --global pull.rebase true
-
-echo 85 | sudo tee /sys/class/power_supply/BAT0/charge_stop_threshold
 
 
 # prevent docker expose port to public

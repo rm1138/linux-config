@@ -2,3 +2,19 @@ nvim plugin
 
 1. vim :PlugInstall
 2. vim :CocInstall coc-json coc-tsserver coc-rust-analyzer
+
+
+
+# theme and icon
+paru papirus-icon-theme
+paru matcha-gtk-theme
+# sound control
+paru pavucontrol
+# fs and mount control
+paru gvfs
+# file manager
+install thunar
+
+install xfce4-setting to set gtk default app
+
+wl-clipboard-rs

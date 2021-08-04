@@ -82,7 +82,7 @@ setopt histignorespace
 plugins=(git zsh-autosuggestions autojump fzf)
 
 source $ZSH/oh-my-zsh.sh
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+source ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k/powerlevel10k.zsh-theme
 
 # User configuration
 
@@ -98,6 +98,7 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 #   export EDITOR='mvim'
 # fi
 
+export EDITOR='nvim'
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -115,7 +116,6 @@ export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 export TERM=xterm-256color
 source <(kubectl completion zsh)
 
-
 eval "$(zoxide init zsh)"
 
 source /usr/share/fzf/key-bindings.zsh
@@ -130,20 +130,5 @@ alias cat=bat
 
 source <(argocd completion zsh)
 eval $(spt --completions zsh)
-eval $(thefuck --alias)
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/ricky/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/ricky/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/ricky/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/ricky/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 source /usr/share/nvm/init-nvm.sh
