@@ -10,16 +10,21 @@
 }
 
 window#waybar {
-  background-color: rgba(29, 31, 33, 0.8);
-  padding: 5px 10px;
+  background-color: rgba(29, 31, 33, 0.7);
+  padding: 5px 5px;
 }
 
 #clock, #workspaces, #mode, #, #network, #pulseaudio, #cpu, #memory, #battery, #tray, #temperature {
-  padding: 0 10px;
+  padding: 0 8px;
 }
 
-#idle_inhibitor, #custom-connect-wm4, #custom-weather {
+#idle_inhibitor {
   padding: 0 5px;
+}
+
+#idle_inhibitor.activated {
+  color: @base00;
+  background-color: @base06;
 }
 
 #clock {
@@ -27,8 +32,9 @@ window#waybar {
 }
 
 #window {
-  padding: 0 200px;
+  padding: 0 100px;
 }
+
 /*
 #network {
   border-top: 1px solid @base08;
@@ -52,7 +58,6 @@ window#waybar {
   border-top: 1px solid @base0E;
 }*/
 
-
 #custom-weather {
   padding-top: 4px;
 }
@@ -72,7 +77,6 @@ window#waybar {
   background-color: @base0B;
   color: #212121;
 }	
-
 
 @keyframes blink {
   to {
@@ -101,30 +105,31 @@ window#waybar {
 }
 
 #battery.critical:not(.charging) {
-    background-color: @base08;
-    color: #ffffff;
-    animation-name: blink;
-    animation-duration: 1s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+  background-color: @base08;
+  color: #ffffff;
+  animation-name: blink;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 #battery.warning:not(.charging) {
-    background-color: @base09;
-    color: #ffffff;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+  background-color: @base09;
+  color: #ffffff;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
-
 
 #workspaces button {
   padding: 0 5px 0 5px;
   margin: 0 2px 0 2px;
   border-bottom: 2px solid rgba(0, 0, 0, 0);
+  color: @base07;
+  background-color: @base00;
   animation-name: unselect;
   animation-duration: 0.5s;
   animation-timing-function: ease;
@@ -141,9 +146,7 @@ window#waybar {
 }
 
 #workspaces button.urgent {
-  color: @base00;
-  background-color: @base07;
-  animation-name: blink;
+  animation-name: select;
   animation-duration: 0.5s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;

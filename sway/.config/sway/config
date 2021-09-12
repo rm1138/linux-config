@@ -70,8 +70,14 @@ exec swayidle -w \
        pointer_accel 0.3
    }
     
-   # Swap cap and esc key, set the keyboard repeat delay and repeat rate
+   # Set the keyboard repeat delay and repeat rate
    input "type:keyboard" {
+       repeat_delay 300
+       repeat_rate 50
+   }
+   
+   # Only for the internal keyboard, swap cap and esc key, set the keyboard repeat delay and repeat rate
+   input "1:1:AT_Translated_Set_2_keyboard" {
        xkb_options caps:swapescape
        repeat_delay 300
        repeat_rate 50
@@ -236,7 +242,8 @@ bindsym XF86MonBrightnessUp exec "brightnessctl set +5%"
 bindsym XF86MonBrightnessDown exec "brightnessctl set 5%-"
 bindsym $mod+alt+l exec $lock
 bindsym $mod+alt+o exec "pacmd set-card-profile bluez_card.94_DB_56_70_C8_69 a2dp_sink"
-bindsym $mod+alt+p exec "pacmd set-card-profile bluez_card.94_DB_56_70_C8_69 headset_head_unit"
+bindsym $mod+alt+p exec "pacmd set-card-profile bluez_card.94_DB_56_70_C8_69 handsfree_head_unit"
+bindsym $mod+alt+i exec "bluetoothctl power on && bluetoothctl connect '94:DB:56:70:C8:69'"
 bindsym $mod+shift+b exec "killall -SIGUSR1 waybar"
 
     

@@ -30,6 +30,11 @@ Plug 'plasticboy/vim-markdown'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript'
+Plug 'mracos/mermaid.vim'
+Plug 'uarun/vim-protobuf'
+
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
 call plug#end()
 
 set updatetime=100
@@ -127,9 +132,9 @@ let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 " Easymotion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
-" `s{char}{char}{label}`
+" `f{char}{char}{label}`
 " Need one more keystroke, but on average, it may be more comfortable.
-nmap s <Plug>(easymotion-overwin-f2)
+nmap f <Plug>(easymotion-overwin-f2)
 
 " Turn on case-insensitive feature
 let g:EasyMotion_smartcase = 1
@@ -142,6 +147,7 @@ map <Leader>k <Plug>(easymotion-k)
 " back to netrw with <Leader> + b
 map <Leader>b :e %:h<CR>
 map <Leader>f :GFiles<CR>
+map <Leader>g :Ag<CR>
 map <Leader>t :Windows<CR>
 noremap <Leader>w :w<CR>
 noremap <Leader>q :q<CR>
@@ -157,6 +163,7 @@ vmap <Leader>p "+p
 vmap <Leader>P "+P
 
 
+nmap <Leader>m <Plug>MarkdownPreviewToggle
 
 " No arrow keys --- force yourself to use the home row
 nnoremap <up> <nop>

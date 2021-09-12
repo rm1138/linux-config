@@ -3,17 +3,13 @@
     "height": 28,
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["clock"],
-    "modules-right": [ "network", "cpu", "memory", "temperature", "battery", "pulseaudio", "idle_inhibitor", "custom/connect-wm4", "tray"],
+    "modules-right": [ "network", "cpu", "memory", "temperature", "battery", "pulseaudio", "tray", "idle_inhibitor"],
     "custom/weather": {
         "format": "{}",
         "tooltip": true,
         "interval": 3600,
         "exec": "$HOME/.config/waybar/weather.py",
         "return-type": "json"
-    },
-    "custom/connect-wm4": {
-        "format": "",
-        "on-click": "bluetoothctl power on && bluetoothctl connect '94:DB:56:70:C8:69'"
     },
     "sway/workspaces": {
         "disable-scroll": true,
@@ -26,8 +22,8 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "",
-            "deactivated": ""
+            "activated": "",
+            "deactivated": ""
         }
     },
     "tray": {
@@ -40,7 +36,7 @@
         "interval": 1
     },
     "cpu": {
-        "format": " {usage}% ({load:0.2f})",
+        "format": " {usage}% {avg_frequency}GHz ({load:0.2f}) ",
         "tooltip": false,
         "interval": 1
     },
@@ -73,8 +69,8 @@
         "format-time": "{H:02}:{M:02}",
         "format-charging": " {power:.0}W {time}",
         "format-plugged": "",
-        "format": "{icon} {capacity}%",
-        "format-alt": "{icon} {power:.0}W {time}",
+        "format": "{icon}",
+        "format-alt": "{capacity}% {power:.0}W {time}",
         "format-icons": ["", "", "", "", ""]
     },
     "network": {
