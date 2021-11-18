@@ -1,0 +1,10 @@
+[user]
+	name = Ricky Lam
+	email = rm1138@gmail.com
+	signingkey = E7F893E61BBD938F
+[pull]
+	rebase = true
+[commit]
+	gpgsign = true
+[alias]
+	pushall = !git remote | xargs -L1 git push --all
