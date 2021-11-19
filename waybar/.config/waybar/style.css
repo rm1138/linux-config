@@ -2,10 +2,10 @@
 
 * {
   border: none;
-  font-family: "hack";
+  font-family: "Hack", "Font Awesome 5 Free";
   min-height: 0;
   border-radius: 0;
-  color: @base06;
+  color: @base03;
   background-color: rgba(29, 31, 33, 1.0);
 }
 
