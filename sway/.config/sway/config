@@ -94,7 +94,7 @@ exec swayidle -w \
     bindsym $mod+Return exec $term
 
     # Kill focused window
-    bindsym $mod+q kill
+    bindsym $mod+Shift+q kill
 
     # Start your launcher
     bindsym $mod+Space exec $menu
@@ -234,10 +234,13 @@ bar {
 }
 
 bindsym XF86Display exec "swaymsg output eDP-1 toggle"
-bindsym XF86AudioMicMute exec "pactl set-source-mute 1 toggle"
-bindsym XF86AudioRaiseVolume exec "pulsemixer --change-volume 5"
+bindsym XF86Tools exec "pacmd list-sources | grep -oP 'index: \d+' | awk '{ print $2 }' | xargs -I{} pactl set-source-mute {} toggle"
+bindsym XF86AudioMicMute exec "pacmd list-sources | grep -oP 'index: \d+' | awk '{ print $2 }' | xargs -I{} pactl set-source-mute {} toggle"
+bindsym XF86AudioRaiseVolume exec "pulsemixer --change-volume 1"
 bindsym XF86AudioLowerVolume exec "pulsemixer --change-volume -5"
-bindsym XF86AudioMute exec "pulsemixer --toggle-mute"
+bindsym XF86Launch5 exec "pulsemixer --list-sources | grep Default | awk '{ print $3 }' | sed 's/,//' | xargs -I{} pulsemixer --id {} --change-volume 1"
+bindsym XF86Launch6 exec "pulsemixer --list-sources | grep Default | awk '{ print $3 }' | sed 's/,//' | xargs -I{} pulsemixer --id {} --change-volume -5"
+bindsym XF86AudioMute exec "pacmd list-sinks | grep -oP 'index: \d+' | awk '{ print $2 }' | xargs -I{} pactl set-sink-mute {} toggle"
 bindsym XF86MonBrightnessUp exec "brightnessctl set +5%"
 bindsym XF86MonBrightnessDown exec "brightnessctl set 5%-"
 bindsym $mod+alt+l exec $lock
@@ -276,6 +279,12 @@ exec ~/.config/sway/inactive-windows-transparency.py
 
 # multiple screen control
 exec_always pkill kanshi; kanshi
+
+# mute all audio sources 
+exec_always "pacmd list-sources | grep -oP 'index: \d+' | awk '{ print $2 }' | xargs -I{} pactl set-source-mute {} 1"
+
+# mute all audio sinks
+exec_always "pacmd list-sinks | grep -oP 'index: \d+' | awk '{ print $2 }' | xargs -I{} pactl set-sink-mute {} 1"
 
 # apply gtk theme
 exec ~/.config/sway/config_gtk_theme.sh
