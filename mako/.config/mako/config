@@ -1,25 +1,34 @@
-font=Hack 12
+font=Noto Sans 12
 
-padding=20,20,20
+margin=20,40,10
+padding=10,20,15
 
-height=200
+width=350
+height=300
 
-border-radius=8
+max-icon-size=32
+border-size=2
+border-radius=5
 
-margin=20,20,20
+default-timeout=30000
+ignore-timeout=1
 
-default-timeout=120
+max-visible=3
+
+anchor=top-right
+layer=overlay
 
 background-color=#2d2d2d
-text-color=#cccccc
 border-color=#515151
 
 [urgency=low]
-background-color=#2d2d2d
-text-color=#ffcc66
-border-color=#515151
+text-color=#b4b7b4
 
-[urgency=high]
-background-color=#2d2d2d
-text-color=#f2777a
-border-color=#515151
+[urgency=normal]
+text-color=#ffffff
+
+[urgency=critical]
+text-color=#ffcc66
+
+[app-name="Discord"]
+default-timeout=0
