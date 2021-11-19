@@ -8,18 +8,17 @@ echo -e "${GREEN}Installing package from Offical Repo${NC}"
 sudo pacman -S --needed --noconfirm \
 	base-devel \
 	docker docker-compose \
-        firefox-developer-edition chromium \
-       	alacritty \
+  firefox-developer-edition chromium \
+  alacritty \
 	zsh \
-	picom \
 	rust \
 	telegram-desktop \
-	nodejs yarn \
+	nodejs \
+  yarn \
 	openssh \
 	neovim tmux bmon htop curl wget p7zip jq tree \
 	stow \
 	feh \
-	ulauncher \
 	fcitx \
 	fcitx-table-extra \
 	fcitx-configtool \
@@ -28,6 +27,7 @@ sudo pacman -S --needed --noconfirm \
 	mpv \
 	wmname \
 	gdm \
+	mako \
 	fzf
 
 if ! command -v paru &> /dev/null
@@ -44,9 +44,10 @@ fi
 
 echo -e "${GREEN}Installing package from AUR Repo${NC}"
 paru -S --noconfirm --needed \
-	intellij-idea-ultimate-edition-jre webstorm-jre \
-       	visual-studio-code-bin \
-       	slack-desktop \
+	intellij-idea-ultimate-edition-jre \
+  webstorm-jre \
+  visual-studio-code-bin \
+  slack-desktop \
 	enpass-bin \
 	auto-cpufreq \
 	bluez-utils \
@@ -54,7 +55,6 @@ paru -S --noconfirm --needed \
 	libinput-gestures xdotool wmctrl \
 	insomnia-bin \
 	1password \
-	dunst-git \
 	sway-git \
 	swaylock \
 	swayidle \
@@ -62,6 +62,7 @@ paru -S --noconfirm --needed \
 	waybar \
 	otf-font-awesome \
 	ttf-font-awesome \
+  nerd-fonts-hack \
   autotiling-rs-git \
   yofi-git \
   autojump-rs
@@ -80,13 +81,17 @@ echo -e "${GREEN}Package Installation Completed!!${NC}"
 
 stow zsh
 stow p10k
-stow dunst
 stow ulauncher
 stow mpv
 stow sway
 stow waybar
 stow kanshi
 stow libinput-gestures
+stow mako
+stow gitconfig
+stow yofi
+stow nvim
+
 
 echo -e "${GREEN}Configuration files linked${NC}"
 sudo systemctl enable auto-cpufreq
