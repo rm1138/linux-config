@@ -337,9 +337,13 @@ set expandtab
 
 set foldmethod=syntax
 set foldlevel=99
+set scrolloff=12
+set sidescrolloff=12
 
 hi Normal ctermbg=None guibg=None
 
+nnoremap <silent> <Leader>ve :tabnew $MYVIMRC<cr>
+nnoremap <silent> <Leader>vr :source $MYVIMRC<cr>
 "function! GitStatus()
 "  let [a,m,r] = GitGutterGetHunkSummary()
 "  return printf('+%d ~%d -%d', a, m, r)
