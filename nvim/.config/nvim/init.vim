@@ -8,14 +8,12 @@ call plug#begin()
 Plug 'easymotion/vim-easymotion'
 Plug 'rust-lang/rust.vim'
 Plug 'chriskempson/base16-vim'
-
 " Git 
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 
 " Plug 'preservim/nerdtree'
-
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -57,8 +55,6 @@ Plug 'folke/lsp-colors.nvim'
 
 call plug#end()
 
-set updatetime=100
-
 if exists('+termguicolors')
   let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
@@ -67,12 +63,6 @@ endif
 
 " let base16colorspace=256
 colorscheme base16-tomorrow-night-eighties
-
-" rust
-"let g:rustfmt_autosave = 1
-"let g:rustfmt_emit_files = 1
-"let g:rustfmt_fail_silently = 0
-"let g:rust_clip_command = 'xclip -selection clipboard'
 
 " netrw
 let ghregex='\(^\|\s\s\)\zs\.\S\+'
@@ -137,10 +127,8 @@ cmp.setup.cmdline(':', {
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-
-
-  --Enable completion triggered by <c-x><c-o>
+  
+  -- Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
@@ -179,20 +167,12 @@ lspconfig.rust_analyzer.setup {
     debounce_text_changes = 150,
   },
   settings = {
-    ["rust-analyzer"] = {
-      cargo = {
-        allFeatures = true,
-      },
-    },
+    ["rust-analyzer"] = {},
   },
   capabilities = capabilities,
 }
 
-lspconfig.phpactor.setup {
-  on_attach = on_attach
-}
-
-lspconfig.tsserver.setup({
+lspconfig.tsserver.setup {
     on_attach = function(client, bufnr)
         local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
@@ -211,12 +191,10 @@ lspconfig.tsserver.setup({
         -- Mappings.
         local opts = { noremap=true, silent=true }
 
-        buf_set_keymap("n", "gs", ":TSLspOrganize<CR>", opts)
-        buf_set_keymap("n", "gi", ":TSLspRenameFile<CR>", opts)
         buf_set_keymap("n", "go", ":TSLspImportAll<CR>", opts) 
         on_attach(client, bufnr)
     end,
-})
+}
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -230,32 +208,53 @@ require("trouble").setup {
 
 }
 
-require("lsp-colors").setup({
+require("lsp-colors").setup {
   Error = "#db4b4b",
   Warning = "#e0af68",
   Information = "#0db9d7",
   Hint = "#10B981"
-})
+}
 
 local null_ls = require("null-ls")
-null_ls.config({
+
+null_ls.setup {
+    on_attach = on_attach,
     sources = {
-        null_ls.builtins.diagnostics.eslint_d.with({ -- eslint or eslint_d
-            prefer_local = "node_modules/.bin",
+        null_ls.builtins.diagnostics.eslint.with({
+           -- prefer_local = "node_modules/.bin",
         }),
-        null_ls.builtins.code_actions.eslint_d.with({ -- eslint or eslint_d
-            prefer_local = "node_modules/.bin",
+        null_ls.builtins.code_actions.eslint.with({ -- eslint or eslint_d
+           -- prefer_local = "node_modules/.bin",
         }),
         null_ls.builtins.formatting.prettier.with({ -- prettier, eslint, eslint_d, or prettierd
             prefer_local = "node_modules/.bin",
         }),
     },
     debug = true
-})
+}
 
-lspconfig["null-ls"].setup({ on_attach = on_attach })
-vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+-- vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
 END
+
+autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ only_current_line = true }
+
+
+" rust
+let g:rustfmt_autosave = 1
+let g:rustfmt_emit_files = 1
+let g:rustfmt_fail_silently = 0
+let g:rust_clip_command = 'xclip -selection clipboard'
+
+" Completion
+" Better completion
+" menuone: popup even when there's only one match
+" noinsert: Do not insert text until a selection is made
+" noselect: Do not select, force user to select one from the menu
+set completeopt=menuone,noinsert,noselect
+" Better display for messages
+set cmdheight=2
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
 
 " fzf
 let g:fzf_preview_window = ['right:50%', 'ctrl-/']
@@ -274,12 +273,25 @@ let g:EasyMotion_smartcase = 1
 "map <Leader>j <Plug>(easymotion-j)
 "map <Leader>k <Plug>(easymotion-k)
 
+" Proper search
+set incsearch
+set ignorecase
+set smartcase
+set gdefault
+
+" Search results centered please
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+nnoremap <silent> * *zz
+nnoremap <silent> # #zz
+nnoremap <silent> g* g*zz
 
 " back to netrw with <Leader> + b
 map <Leader>b :e %:h<CR>
 map <Leader>f :GFiles<CR>
 map <Leader>g :Ag<CR>
 map <Leader>t :Windows<CR>
+map <Esc><Esc> :nohl<CR>
 noremap <Leader>w :w<CR>
 noremap <Leader>q :q<CR>
 

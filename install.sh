@@ -52,11 +52,11 @@ paru -S --noconfirm --needed \
 	auto-cpufreq \
 	bluez-utils \
 	fcitx-qt5 \
-	libinput-gestures xdotool wmctrl \
+	#libinput-gestures xdotool wmctrl \
 	insomnia-bin \
 	1password \
 	sway-git \
-	swaylock \
+	swaylock-effects \
 	swayidle \
 	kanshi \
 	waybar \
@@ -81,7 +81,6 @@ echo -e "${GREEN}Package Installation Completed!!${NC}"
 
 stow zsh
 stow p10k
-stow ulauncher
 stow mpv
 stow sway
 stow waybar

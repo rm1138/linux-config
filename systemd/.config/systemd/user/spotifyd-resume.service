@@ -1,0 +1,10 @@
+[Unit]
+Description=Restart Spotifyd after resume
+After=suspend.target
+
+[Service]
+Type=simple
+ExecStart=/bin/systemctl --no-block --user restart spotifyd.service
+
+[Install]
+WantedBy=suspend.target

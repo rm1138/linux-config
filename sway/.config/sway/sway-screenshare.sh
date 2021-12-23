@@ -19,14 +19,16 @@ geometry(){
 if pgrep wf-recorder > /dev/null
 then
 	if pgrep wf-recorder > /dev/null; then
-		pkill wf-recorder > /dev/null
+		pkill mpv > /dev/null
+    pkill wf-recorder > /dev/null
 	fi
 	notify-send -t 2000 "Wayland recording has been stopped"
 else
 	if ! pgrep wf-recorder > /dev/null; then
 		geometry=$(geometry) || exit $?
-		wf-recorder --muxer=v4l2 --codec=rawvideo --file=/dev/video2 --geometry="$geometry" &
+		wf-recorder --muxer=v4l2 --codec=rawvideo --file=/dev/video2 --audio --geometry="$geometry" &
 	fi
+  mpv --profile=low-latency av://v4l2:/dev/video2 &
 	notify-send -t 2000 "Wayland recording has been started"
 fi
 } > ~/.wayland-share-screen.log 2>&1

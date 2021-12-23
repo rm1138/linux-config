@@ -111,8 +111,9 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias vim="nvim"
 source $HOME/.cargo/env
-export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
+# export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 export TERM=xterm-256color
+
 source <(kubectl completion zsh)
 
 
@@ -127,4 +128,5 @@ source /usr/share/fzf/completion.zsh
 [[ ! -f ~/linux-config/p10k/.p10k.zsh ]] || source ~/linux-config/p10k/.p10k.zsh
 alias cat=bat
 
-source /usr/share/nvm/init-nvm.sh
+export PATH="/home/ricky/.local/share/solana/install/active_release/bin:$PATH"
+# source /usr/share/nvm/init-nvm.sh
