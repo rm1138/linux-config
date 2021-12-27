@@ -6,11 +6,11 @@
   min-height: 0;
   border-radius: 0;
   color: @base03;
+  font-size: 13;
   background-color: rgba(29, 31, 33, 1.0);
 }
 
 window#waybar {
-  background-color: rgba(29, 31, 33, 0.7);
   padding: 5px 5px;
 }
 
@@ -18,8 +18,13 @@ window#waybar {
   padding: 0 8px;
 }
 
+#clock {
+  font-size: 14;
+}
+
 #idle_inhibitor {
   padding: 0 5px;
+
 }
 
 #idle_inhibitor.activated {
@@ -31,38 +36,6 @@ window#waybar {
   font-weight: bold;
 }
 
-#window {
-  padding: 0 100px;
-}
-
-/*
-#network {
-  border-top: 1px solid @base08;
-}
-#cpu {
-  border-top: 1px solid @base09;
-}
-#memory {
-  border-top: 1px solid @base0A;
-}
-#temperature {
-  border-top: 1px solid @base0B;
-}
-#battery {
-  border-top: 1px solid @base0C;
-}
-#pulseaudio {
-  border-top: 1px solid @base0D;
-}
-#tray {
-  border-top: 1px solid @base0E;
-}*/
-
-#custom-weather {
-  padding-top: 4px;
-}
-
-
 #network.disconnected {
   background-color: @base08;
 }
@@ -71,7 +44,6 @@ window#waybar {
   background-color: @base09;
   color: @base00;
 }
-
 
 #battery.charging {
   background-color: @base0B;
@@ -87,20 +59,29 @@ window#waybar {
 
 
 @keyframes select {
-  from {
-    border-bottom: 2px solid rgba(0, 0, 0, 0);
+  0% {
+    color: @base02;
   }
-  to {
-    border-bottom: 2px solid @base0A;
+  100% {
+    color: @base0A;
+  }
+}
+
+@keyframes workspace-blink {
+  0% {
+    color: @base00;
+  }
+  100% {
+    color: @base08;
   }
 }
 
 @keyframes unselect {
-  from {
-    border-bottom: 2px solid @base0A;
+  0% {
+    color: @base0A;
   }
-  to {
-    border-bottom: 2px solid rgba(0, 0, 0, 0);
+  100% {
+    color: @base02;
   }
 }
 
@@ -127,27 +108,30 @@ window#waybar {
 #workspaces button {
   padding: 0 5px 0 5px;
   margin: 0 2px 0 2px;
-  border-bottom: 2px solid rgba(0, 0, 0, 0);
-  color: @base07;
-  background-color: @base00;
+}
+
+#workspaces button label {
+  font-size: 11px;
+  font-weight: 900;
+  color: @base0A;
   animation-name: unselect;
   animation-duration: 0.5s;
   animation-timing-function: ease;
   animation-iteration-count: 1;
-  animation-fill-mode: both;
+  animation-fill-mode: forwards;
 }
 
-#workspaces button.focused {
+#workspaces button.focused label {
   animation-name: select;
   animation-duration: 0.5s;
   animation-timing-function: ease;
   animation-iteration-count: 1;
-  animation-fill-mode: both;
+  animation-fill-mode: forwards;
 }
 
-#workspaces button.urgent {
-  animation-name: select;
-  animation-duration: 0.5s;
+#workspaces button.urgent label {
+  animation-name: workspace-blink;
+  animation-duration: 0.3s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate;
