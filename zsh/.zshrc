@@ -91,13 +91,7 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
+export EDITOR="nvim"
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -127,6 +121,7 @@ source /usr/share/fzf/completion.zsh
 # To customize prompt, run `p10k configure` or edit ~/linux-config/p10k/.p10k.zsh.
 [[ ! -f ~/linux-config/p10k/.p10k.zsh ]] || source ~/linux-config/p10k/.p10k.zsh
 alias cat=bat
+
 
 export PATH="/home/ricky/.local/share/solana/install/active_release/bin:$PATH"
 # source /usr/share/nvm/init-nvm.sh

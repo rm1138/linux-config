@@ -61,7 +61,7 @@ exec swayidle -w \
 #
 # Example configuration:
 #
-   input "2:7:SynPS/2_Synaptics_TouchPad" {
+   input "1267:12739:ELAN050B:00_04F3:31C3_Touchpad" {
        dwt enabled
        tap enabled
        natural_scroll enabled
@@ -261,9 +261,9 @@ bindsym Shift+Alt+Print exec grim -g "$(XCURSOR_THEME=Adwaita XCURSOR_SIZE=10 sl
 # capture the focused monitor to clipboard    
 bindsym Shift+Control+Print exec (grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy) && notify-send "captured"
 
-set $laptop eDP-1
-bindswitch --reload --locked lid:on output $laptop disable
-bindswitch --reload --locked lid:off output $laptop enable
+#set $laptop eDP-1
+#bindswitch --reload --locked lid:on output $laptop disable
+#bindswitch --reload --locked lid:off output $laptop enable
 
 
 for_window [app_id="pavucontrol"] floating enable
@@ -278,7 +278,7 @@ exec_always ~/.config/sway/screen_reload.sh
 exec ~/.config/sway/inactive-windows-transparency.py
 
 # multiple screen control
-exec_always pkill kanshi; kanshi
+exec_always kanshi
 
 # mute all audio sources 
 exec_always "pacmd list-sources | grep -oP 'index: \d+' | awk '{ print $2 }' | xargs -I{} pactl set-source-mute {} 1"

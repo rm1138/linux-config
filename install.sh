@@ -67,7 +67,7 @@ paru -S --noconfirm --needed \
   yofi-git \
   autojump-rs
 
-sudo systemctl enable gdm.service -f
+# sudo systemctl enable gdm.service -f
 
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
@@ -106,6 +106,8 @@ git config --global pull.rebase true
 
 echo 85 | sudo tee /sys/class/power_supply/BAT0/charge_stop_threshold
 
+# change default browser
+xdg-settings set default-web-browser firefox-developer-edition.desktop
 
 # prevent docker expose port to public
 echo "{ "iptables": false }" | sudo tee -a /etc/docker/daemon.json > /dev/null

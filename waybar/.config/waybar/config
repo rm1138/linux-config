@@ -41,35 +41,37 @@
         "interval": 1
     },
     "cpu": {
-        "format": " {usage}%",
-        "tooltip-format": " {usage}% {avg_frequency}GHz ({load:0.2f})",
-        "tooltip": true,
-        "interval": 1
+        "format": " {usage}% {avg_frequency}GHz ({load:0.2f})",
+        "tooltip": false,
+        "interval": 10
     },
     "memory": {
         "format": " {used:0.1f}GiB",
-        "interval": 1
+        "interval": 10
     },
     "temperature": {
-        //"hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
-        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+        "hwmon-path": "/sys/class/hwmon/hwmon3/temp1_input",
+        //"hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
         "critical-threshold": 75,
         "format-critical": " {temperatureC}°C",
         "format": " {temperatureC}°C",
-        "interval": 1
+        "interval": 10
     },
     "battery": {
+        "bat": "BAT1",
+        "adapter": "ACAD",
         "states": {
-          "normal": 84,
+          "normal": 100,
           "warning": 50,
           "critical": 30,
         },
-        "full-at": 85,
+        "full-at": 100,
         "interval": 10,
+        "design-capacity": true,
         "format-time": "{H:02}:{M:02}",
-        "format-charging": " {power:.0}W {time}",
+        "format-charging": " {capacity}% {power:.0}W {time}",
         "format-plugged": "",
-        "format": "{icon}",
+        "format": "{icon} {capacity}%",
         "format-alt": "{capacity}% {power:.0}W {time}",
         "format-icons": ["", "", "", "", ""]
     },
@@ -80,7 +82,7 @@
         "format-disconnected": "",
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
-        "interval": 1
+        "interval": 10
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
