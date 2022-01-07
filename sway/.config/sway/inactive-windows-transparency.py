@@ -8,7 +8,7 @@
 
 import i3ipc
 
-transparency_val = '0.9';
+transparency_val = '0.95';
 ipc              = i3ipc.Connection()
 prev_focused     = None
 prev_workspace   = ipc.get_tree().find_focused().workspace().num

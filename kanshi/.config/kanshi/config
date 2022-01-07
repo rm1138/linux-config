@@ -30,3 +30,8 @@ profile "Acer home" {
   output "Dell Inc. DELL U2913WM 5YD8C31H228L" mode 2560x1080 position 1920,0
 	output "Unknown 0x683D 0x00000000" enable position 0,0 scale 1
 }
+
+profile "K11" {
+  output "Unknown Mi Monitor 0000000000000" mode 3440x1440 position 0,0
+	output "Unknown 0x683D 0x00000000" enable position 3440,360 scale 1
+}

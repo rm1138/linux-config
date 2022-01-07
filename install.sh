@@ -10,13 +10,14 @@ sudo pacman -S --needed --noconfirm \
 	docker docker-compose \
   firefox-developer-edition chromium \
   alacritty \
-	zsh \
+	zsh zsh-theme-powerlevel10k \
 	rust \
 	telegram-desktop \
 	nodejs \
   yarn \
 	openssh \
 	neovim tmux bmon htop curl wget p7zip jq tree \
+  usbutils \
 	stow \
 	feh \
 	fcitx \
@@ -54,7 +55,7 @@ paru -S --noconfirm --needed \
 	fcitx-qt5 \
 	#libinput-gestures xdotool wmctrl \
 	insomnia-bin \
-	1password \
+	#1password \
 	sway-git \
 	swaylock-effects \
 	swayidle \
@@ -65,17 +66,23 @@ paru -S --noconfirm --needed \
   nerd-fonts-hack \
   autotiling-rs-git \
   yofi-git \
-  autojump-rs
+  autojump-rs \
+  ly # login manager
 
 # sudo systemctl enable gdm.service -f
-
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+if [ ! -d "~/.oh-my-zsh" ] then
+  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
 
 # zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+if [ ! -d "~/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ] then
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+fi
 
 # zsh p10k theme
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+if [ ! -d "~/.oh-my-zsh/custom/themes/powerlevel10k" ] then
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+fi
 
 echo -e "${GREEN}Package Installation Completed!!${NC}"
 
@@ -85,7 +92,7 @@ stow mpv
 stow sway
 stow waybar
 stow kanshi
-stow libinput-gestures
+# stow libinput-gestures
 stow mako
 stow gitconfig
 stow yofi
@@ -94,6 +101,9 @@ stow nvim
 
 echo -e "${GREEN}Configuration files linked${NC}"
 sudo systemctl enable auto-cpufreq
+
+# enable login manager
+sudo systemctl enable ly.service
 
 # Docker user
 

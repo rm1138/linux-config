@@ -19,18 +19,19 @@ set $term alacritty
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 set $menu swaymsg exec yofi
-set $bg ~/.config/sway/wallpaper2.png
-set $lock swaylock -f --screenshots --ignore-empty-password --effect-blur 5x3 --clock --indicator --indicator-radius 100 --datestr \"%a %b %Y\" --ring-color 8abeb7 --text-color ffffff --bs-hl-color 81a2be --key-hl-color 81a2be
+set $lock swaylock -f --screenshots --ignore-empty-password 
+# --effect-blur 5x3 --clock --indicator --indicator-radius 100 --datestr \"%a %b %Y\" --ring-color 8abeb7 --text-color ffffff --bs-hl-color 81a2be --key-hl-color 81a2be
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg $bg fill
+output * bg ~/.config/sway/wallpaper.png fill
+output eDP-1 bg ~/.config/sway/wallpaper2.png fill
 
 # Hide the border
 default_border none
 
-gaps inner 5
+gaps inner 10
 gaps outer 0
 
 focus_follows_mouse always
@@ -49,8 +50,8 @@ mouse_warping container
 exec swayidle -w \
        timeout 120 'brightnessctl --device=tpacpi::kbd_backlight -s && brightnessctl --device=tpacpi::kbd_backlight s 0' resume 'brightnessctl --device=tpacpi::kbd_backlight -r' \
        timeout 120 'brightnessctl -s && brightnessctl set 10%' resume 'brightnessctl -r' \
-       timeout 300 '$lock' \
-       timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+       timeout 3600 '$lock' \
+       timeout 7200 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
        before-sleep '$lock'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -67,7 +68,7 @@ exec swayidle -w \
        natural_scroll enabled
        middle_emulation enabled
        accel_profile adaptive
-       pointer_accel 0.3
+       pointer_accel 0.4
    }
     
    # Set the keyboard repeat delay and repeat rate
@@ -296,7 +297,7 @@ exec fcitx
 # password manager
 exec enpass -minimize
 # IM
-#exec slack -us
+exec slack -us
 exec telegram-desktop -startintray
 exec discord --start-minimized
 

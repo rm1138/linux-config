@@ -13,19 +13,17 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 
-" Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " Syntactic language support
+Plug 'rust-lang/rust.vim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+"Plug 'arzg/vim-rust-syntax-ext'
 Plug 'cespare/vim-toml'
 Plug 'stephpy/vim-yaml'
-Plug 'rust-lang/rust.vim'
-Plug 'godlygeek/tabular'
+"Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-"Plug 'peitalin/vim-jsx-typescript'
-"Plug 'leafgarland/typescript-vim'
-"Plug 'pangloss/vim-javascript'
 Plug 'mracos/mermaid.vim'
 Plug 'uarun/vim-protobuf'
 
@@ -38,6 +36,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 " Semantic language support
 Plug 'neovim/nvim-lspconfig'
+Plug 'simrat39/rust-tools.nvim'
 Plug 'nvim-lua/lsp_extensions.nvim'
 Plug 'hrsh7th/cmp-nvim-lsp', {'branch': 'main'}
 Plug 'hrsh7th/cmp-buffer', {'branch': 'main'}
@@ -61,7 +60,17 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-" let base16colorspace=256
+" Inlay highlighting
+function! s:base16_customize() abort
+  call Base16hi("Inlay", g:base16_gui02, "", g:base16_cterm02, "", "", "")
+endfunction
+
+augroup on_change_colorschema
+  autocmd!
+  autocmd ColorScheme * call s:base16_customize()
+augroup END
+
+"let base16colorspace=256
 colorscheme base16-tomorrow-night-eighties
 
 " netrw
@@ -86,16 +95,12 @@ let g:mkdp_preview_options = {
 " set filetypes as typescriptreact
 "autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 
-
 " LSP configuration
 lua << END
-local lspconfig = require'lspconfig'
-
 local cmp = require'cmp'
 
 cmp.setup({
   snippet = {
-    -- REQUIRED by nvim-cmp. get rid of it once we can
     expand = function(args)
       vim.fn["vsnip#anonymous"](args.body)
     end,
@@ -106,13 +111,15 @@ cmp.setup({
     ['<CR>'] = cmp.mapping.confirm({ select = true })
   },
   sources = cmp.config.sources({
-    -- TODO: currently snippets from lsp end up getting prioritized -- stop that!
     { name = 'nvim_lsp' },
+    { name = 'vsnip' },
+  }, {
   }, {
     { name = 'path' },
+  }, {
   }),
   experimental = {
-    ghost_text = true,
+    ghost_text = false,
   },
 })
 
@@ -147,30 +154,154 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
   buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  --buf_set_keymap('n', '<space>i', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap("n", "<space>l", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
   -- Get signatures (and _only_ signatures) when in argument lists.
   require "lsp_signature".on_attach({
-    doc_lines = 0,
+    doc_lines = 1,
     handler_opts = {
       border = "none"
     },
   })
 end
 
+local lspconfig = require'lspconfig'
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-lspconfig.rust_analyzer.setup {
-  on_attach = on_attach,
-  flags = {
-    debounce_text_changes = 150,
-  },
-  settings = {
-    ["rust-analyzer"] = {},
-  },
-  capabilities = capabilities,
+local opts = {
+    tools = { -- rust-tools options
+        -- Automatically set inlay hints (type hints)
+        autoSetHints = true,
+
+        -- Whether to show hover actions inside the hover window
+        -- This overrides the default hover handler 
+        hover_with_actions = true,
+
+        -- how to execute terminal commands
+        -- options right now: termopen / quickfix
+        executor = require("rust-tools/executors").termopen,
+
+        runnables = {
+            -- whether to use telescope for selection menu or not
+            use_telescope = true
+
+            -- rest of the opts are forwarded to telescope
+        },
+
+        debuggables = {
+            -- whether to use telescope for selection menu or not
+            use_telescope = true
+
+            -- rest of the opts are forwarded to telescope
+        },
+
+        -- These apply to the default RustSetInlayHints command
+        inlay_hints = {
+
+            -- Only show inlay hints for the current line
+            only_current_line = false,
+
+            -- Event which triggers a refersh of the inlay hints.
+            -- You can make this "CursorMoved" or "CursorMoved,CursorMovedI" but
+            -- not that this may cause  higher CPU usage.
+            -- This option is only respected when only_current_line and
+            -- autoSetHints both are true.
+            only_current_line_autocmd = "CursorHold",
+
+            -- wheter to show parameter hints with the inlay hints or not
+            show_parameter_hints = true,
+
+            -- prefix for parameter hints
+            parameter_hints_prefix = "  ",
+
+            -- prefix for all the other hints (type, chaining)
+            other_hints_prefix = "  ",
+
+            -- whether to align to the length of the longest line in the file
+            max_len_align = false,
+
+            -- padding from the left if max_len_align is true
+            max_len_align_padding = 1,
+
+            -- whether to align to the extreme right or not
+            right_align = false,
+
+            -- padding from the right if right_align is true
+            right_align_padding = 7,
+
+            -- The color of the hints
+            highlight = "Inlay",
+        },
+
+        hover_actions = {
+            -- the border that is used for the hover window
+            -- see vim.api.nvim_open_win()
+            border = {
+                {"╭", "FloatBorder"}, {"─", "FloatBorder"},
+                {"╮", "FloatBorder"}, {"│", "FloatBorder"},
+                {"╯", "FloatBorder"}, {"─", "FloatBorder"},
+                {"╰", "FloatBorder"}, {"│", "FloatBorder"}
+            },
+
+            -- whether the hover action window gets automatically focused
+            auto_focus = false
+        },
+
+        -- settings for showing the crate graph based on graphviz and the dot
+        -- command
+        crate_graph = {
+            -- Backend used for displaying the graph
+            -- see: https://graphviz.org/docs/outputs/
+            -- default: x11
+            backend = "x11",
+            -- where to store the output, nil for no output stored (relative
+            -- path from pwd)
+            -- default: nil
+            output = nil,
+            -- true for all crates.io and external crates, false only the local
+            -- crates
+            -- default: true
+            full = true,
+        }
+    },
+    -- all the opts to send to nvim-lspconfig
+    -- these override the defaults set by rust-tools.nvim
+    -- see https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
+    server = {
+      -- standalone file support
+      -- setting it to false may improve startup time
+      standalone = false,
+      -- rust-analyer options
+      on_attach = on_attach,
+      capabilities = capabilities,
+      settings = {
+        ["rust-analyzer"] = {
+          cargo = {
+            allFeatures = true,
+          },
+          completion = {
+            postfix = {
+              enable = false,
+            },
+          },
+          experimental = {
+            procAttrMacros = false
+          },
+        },
+      },
+    }, 
+    -- debugging stuff
+    dap = {
+        adapter = {
+            type = 'executable',
+            command = 'lldb-vscode',
+            name = "rt_lldb"
+        }
+    }
 }
+
+require('rust-tools').setup(opts)
 
 lspconfig.tsserver.setup {
     on_attach = function(client, bufnr)
@@ -233,11 +364,33 @@ null_ls.setup {
     debug = true
 }
 
--- vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+
+require'nvim-treesitter.configs'.setup {
+  -- One of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = "maintained",
+
+  -- Install languages synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- List of parsers to ignore installing
+  ignore_install = { "javascript" },
+
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
+
+    -- list of language that will be disabled
+    disable = { "c" },
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
 END
-
-autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ only_current_line = true }
-
 
 " rust
 let g:rustfmt_autosave = 1
@@ -269,10 +422,6 @@ nmap f <Plug>(easymotion-overwin-f2)
 " Turn on case-insensitive feature
 let g:EasyMotion_smartcase = 1
 
-" JK motions: Line motions
-"map <Leader>j <Plug>(easymotion-j)
-"map <Leader>k <Plug>(easymotion-k)
-
 " Proper search
 set incsearch
 set ignorecase
@@ -302,6 +451,18 @@ nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
+
+" jump windows/tabs
+nnoremap <Leader><Leader>l <C-W>l
+nnoremap <Leader><Leader>h <C-W>h
+nnoremap <Leader><Leader>j <C-W>j
+nnoremap <Leader><Leader>k <C-W>k
+
+nnoremap <Leader><Leader>t <C-W>T
+nnoremap <Leader><Leader>v :vsplit<cr>
+nnoremap <Leader><Leader>s :split<cr>
+
+nnoremap <Leader><Leader>p <C-W>=
 
 nmap <Leader>m <Plug>MarkdownPreviewToggle
 
@@ -338,6 +499,7 @@ set wildmenu
 syntax enable
 
 filetype plugin indent on
+
 set number
 set relativenumber
 set nowrap
@@ -354,6 +516,7 @@ set sidescrolloff=12
 
 hi Normal ctermbg=None guibg=None
 
+" nvim editing
 nnoremap <silent> <Leader>ve :tabnew $MYVIMRC<cr>
 nnoremap <silent> <Leader>vr :source $MYVIMRC<cr>
 "function! GitStatus()

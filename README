@@ -1,4 +1,11 @@
-nvim plugin
+```
+# install neovim plugin
+nvim :PlugInstall
 
-1. vim :PlugInstall
-2. vim :CocInstall coc-json coc-tsserver coc-rust-analyzer
+# update pacman database
+sudo pacman -Fy
+
+# usage
+pacman -F lsusb
+```
+

@@ -5,13 +5,13 @@
   font-family: "Hack", "Font Awesome 5 Free";
   min-height: 0;
   border-radius: 0;
-  color: @base03;
+  color: @base06;
   font-size: 13;
-  background-color: rgba(29, 31, 33, 1.0);
 }
 
 window#waybar {
   padding: 5px 5px;
+  background-color: rgba(29, 31, 33, 0.7);
 }
 
 #clock, #workspaces, #mode, #, #network, #pulseaudio, #cpu, #memory, #battery, #tray, #temperature {
@@ -24,12 +24,11 @@ window#waybar {
 
 #idle_inhibitor {
   padding: 0 5px;
-
 }
 
 #idle_inhibitor.activated {
   color: @base00;
-  background-color: @base06;
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 #clock {
@@ -113,20 +112,11 @@ window#waybar {
 #workspaces button label {
   font-size: 11px;
   font-weight: 900;
-  color: @base0A;
-  animation-name: unselect;
-  animation-duration: 0.5s;
-  animation-timing-function: ease;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
+  color: @base04;
 }
 
 #workspaces button.focused label {
-  animation-name: select;
-  animation-duration: 0.5s;
-  animation-timing-function: ease;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
+  color: @base0A;
 }
 
 #workspaces button.urgent label {
