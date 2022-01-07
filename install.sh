@@ -27,7 +27,7 @@ sudo pacman -S --needed --noconfirm \
 	pulsemixer brightnessctl \
 	mpv \
 	wmname \
-	gdm \
+	# gdm \
 	mako \
 	fzf
 
@@ -45,17 +45,15 @@ fi
 
 echo -e "${GREEN}Installing package from AUR Repo${NC}"
 paru -S --noconfirm --needed \
-	intellij-idea-ultimate-edition-jre \
-  webstorm-jre \
+	#intellij-idea-ultimate-edition-jre \
+  #webstorm-jre \
   visual-studio-code-bin \
-  slack-desktop \
+  #slack-desktop \
 	enpass-bin \
 	auto-cpufreq \
 	bluez-utils \
 	fcitx-qt5 \
 	#libinput-gestures xdotool wmctrl \
-	insomnia-bin \
-	#1password \
 	sway-git \
 	swaylock-effects \
 	swayidle \
