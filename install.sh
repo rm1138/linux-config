@@ -65,7 +65,7 @@ paru -S --noconfirm --needed \
   autotiling-rs-git \
   yofi-git \
   autojump-rs \
-  ly # login manager
+  slurp grim
 
 # sudo systemctl enable gdm.service -f
 if [ ! -d "~/.oh-my-zsh" ] then

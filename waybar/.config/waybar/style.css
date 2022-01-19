@@ -14,7 +14,20 @@ window#waybar {
   background-color: rgba(29, 31, 33, 0.7);
 }
 
-#clock, #workspaces, #mode, #, #network, #pulseaudio, #cpu, #memory, #battery, #tray, #temperature {
+.color_red {
+  color: @base08;
+}
+
+#clock,
+#workspaces,
+#mode,
+#network,
+#pulseaudio,
+#cpu,
+#memory,
+#battery,
+#tray,
+#temperature {
   padding: 0 8px;
 }
 
@@ -47,7 +60,7 @@ window#waybar {
 #battery.charging {
   background-color: @base0B;
   color: #212121;
-}	
+}
 
 @keyframes blink {
   to {
@@ -55,7 +68,6 @@ window#waybar {
     color: #ffffff;
   }
 }
-
 
 @keyframes select {
   0% {
@@ -126,4 +138,3 @@ window#waybar {
   animation-iteration-count: infinite;
   animation-direction: alternate;
 }
-

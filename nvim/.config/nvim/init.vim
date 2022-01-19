@@ -90,7 +90,7 @@ let g:mkdp_preview_options = {
     \ 'sequence_diagrams': {},
     \ 'flowchart_diagrams': {},
     \ 'content_editable': v:false,
-    \ 'disable_filename': 1
+    \ 'disable_filename': 0
     \ }
 " set filetypes as typescriptreact
 "autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
@@ -216,7 +216,7 @@ local opts = {
             parameter_hints_prefix = "  ",
 
             -- prefix for all the other hints (type, chaining)
-            other_hints_prefix = "  ",
+            other_hints_prefix = " T: ",
 
             -- whether to align to the length of the longest line in the file
             max_len_align = false,
@@ -283,6 +283,9 @@ local opts = {
           completion = {
             postfix = {
               enable = false,
+            },
+            autoself = {
+              enable = true,
             },
           },
           experimental = {
@@ -397,7 +400,7 @@ let g:rustfmt_autosave = 1
 let g:rustfmt_emit_files = 1
 let g:rustfmt_fail_silently = 0
 let g:rust_clip_command = 'xclip -selection clipboard'
-
+nmap <Leader>j :RustHoverActions<CR>
 " Completion
 " Better completion
 " menuone: popup even when there's only one match
@@ -519,8 +522,9 @@ hi Normal ctermbg=None guibg=None
 " nvim editing
 nnoremap <silent> <Leader>ve :tabnew $MYVIMRC<cr>
 nnoremap <silent> <Leader>vr :source $MYVIMRC<cr>
-"function! GitStatus()
-"  let [a,m,r] = GitGutterGetHunkSummary()
-"  return printf('+%d ~%d -%d', a, m, r)
-"endfunction
-"set statusline+=%{GitStatus()}
+
+function! GitStatus()
+  let [a,m,r] = GitGutterGetHunkSummary()
+  return printf('+%d ~%d -%d', a, m, r)
+endfunction
+set statusline=\ %{FugitiveStatusline()}\ %{GitStatus()}\ %=%{strftime('%T')}\ 
