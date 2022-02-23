@@ -24,6 +24,7 @@
 #TERM: alacritty
 
 window:
+  opacity: 0.95
   # Window dimensions (changes require restart)
   #
   # Number of lines/columns (not pixels) in the terminal. The number of columns
@@ -339,7 +340,6 @@ font:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.95
 
 selection:
   # This string contains all characters that are used as separators for
@@ -819,31 +819,31 @@ key_bindings:
 colors:
   # Default colors
   primary:
-    background: "0x1d1f21"
-    foreground: "0xc5c8c6"
+    background: "0x161616"
+    foreground: "0xcccccc"
 
   # Colors the cursor will use if `custom_cursor_colors` is true
   cursor:
-    text: "0x1d1f21"
-    cursor: "0xc5c8c6"
+    text: "0x2d2d2d"
+    cursor: "0xcccccc"
 
   # Normal colors
   normal:
-    black: "0x1d1f21"
-    red: "0xcc6666"
-    green: "0xb5bd68"
-    yellow: "0xf0c674"
-    blue: "0x81a2be"
-    magenta: "0xb294bb"
-    cyan: "0x8abeb7"
-    white: "0xc5c8c6"
+    black: "0x2d2d2d"
+    red: "0xf2777a"
+    green: "0x99cc99"
+    yellow: "0xffcc66"
+    blue: "0x6699cc"
+    magenta: "0xcc99cc"
+    cyan: "0x66cccc"
+    white: "0xcccccc"
 
   # Bright colors
   bright:
-    black: "0x969896"
-    red: "0xde935f"
-    green: "0x282a2e"
-    yellow: "0x373b41"
+    black: "0x999999"
+    red: "0xf99157"
+    green: "0x393939"
+    yellow: "0x515151"
     blue: "0xb4b7b4"
     magenta: "0xe0e0e0"
     cyan: "0xa3685a"
