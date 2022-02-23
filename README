@@ -9,3 +9,17 @@ sudo pacman -Fy
 pacman -F lsusb
 ```
 
+
+# theme and icon
+paru papirus-icon-theme
+paru matcha-gtk-theme
+# sound control
+paru pavucontrol
+# fs and mount control
+paru gvfs
+# file manager
+install thunar
+
+install xfce4-setting to set gtk default app
+
+wl-clipboard-rs

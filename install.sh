@@ -19,7 +19,6 @@ sudo pacman -S --needed --noconfirm \
 	neovim tmux bmon htop curl wget p7zip jq tree \
   usbutils \
 	stow \
-	feh \
 	fcitx \
 	fcitx-table-extra \
 	fcitx-configtool \
@@ -27,9 +26,9 @@ sudo pacman -S --needed --noconfirm \
 	pulsemixer brightnessctl \
 	mpv \
 	wmname \
-	# gdm \
 	mako \
-	fzf
+	fzf \
+  tlp
 
 if ! command -v paru &> /dev/null
 then
@@ -48,13 +47,13 @@ paru -S --noconfirm --needed \
 	#intellij-idea-ultimate-edition-jre \
   #webstorm-jre \
   visual-studio-code-bin \
-  #slack-desktop \
+  slack-desktop \
 	enpass-bin \
 	auto-cpufreq \
 	bluez-utils \
 	fcitx-qt5 \
 	#libinput-gestures xdotool wmctrl \
-	sway-git \
+	sway \
 	swaylock-effects \
 	swayidle \
 	kanshi \
@@ -67,7 +66,6 @@ paru -S --noconfirm --needed \
   autojump-rs \
   slurp grim
 
-# sudo systemctl enable gdm.service -f
 if [ ! -d "~/.oh-my-zsh" ] then
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
@@ -90,27 +88,23 @@ stow mpv
 stow sway
 stow waybar
 stow kanshi
-# stow libinput-gestures
 stow mako
 stow gitconfig
 stow yofi
 stow nvim
+stow alacritty
+stow fcitx
 
+# tlp setting
+sudo cp ./tlp.conf /etc/tlp.conf
+sudo systemctl enable tlp
+sudo tlp start
 
 echo -e "${GREEN}Configuration files linked${NC}"
 sudo systemctl enable auto-cpufreq
 
-# enable login manager
-sudo systemctl enable ly.service
-
 # Docker user
-
 sudo usermod -aG docker $USER
-
-# Git config
-git config --global user.name "Ricky Lam"
-git config --global user.email "rm1138@gmail.com"
-git config --global pull.rebase true
 
 echo 85 | sudo tee /sys/class/power_supply/BAT0/charge_stop_threshold
 
