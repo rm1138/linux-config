@@ -234,19 +234,18 @@ bar {
 }
 
 bindsym XF86Display exec "swaymsg output eDP-1 toggle"
-bindsym XF86Tools exec "pacmd list-sources | grep -oP 'index: \d+' | awk '{ print $2 }' | xargs -I{} pactl set-source-mute {} toggle"
-bindsym XF86AudioMicMute exec "pacmd list-sources | grep -oP 'index: \d+' | awk '{ print $2 }' | xargs -I{} pactl set-source-mute {} toggle"
+bindsym XF86Tools exec "pactl list sources | grep -oP 'Source #\d+' | awk '{ print $2 }' | sed 's/#//g' | xargs -I{} pactl set-source-mute {} toggle"
+bindsym XF86AudioMicMute exec "pactl list sources | grep -oP 'Source #\d+' | awk '{ print $2 }' | sed 's/#//g' | xargs -I{} pactl set-source-mute {} toggle"
 bindsym XF86AudioRaiseVolume exec "pulsemixer --change-volume 1"
 bindsym XF86AudioLowerVolume exec "pulsemixer --change-volume -5"
 bindsym XF86Launch5 exec "pulsemixer --list-sources | grep Default | awk '{ print $3 }' | sed 's/,//' | xargs -I{} pulsemixer --id {} --change-volume 1"
 bindsym XF86Launch6 exec "pulsemixer --list-sources | grep Default | awk '{ print $3 }' | sed 's/,//' | xargs -I{} pulsemixer --id {} --change-volume -5"
-bindsym XF86AudioMute exec "pacmd list-sinks | grep -oP 'index: \d+' | awk '{ print $2 }' | xargs -I{} pactl set-sink-mute {} toggle"
+bindsym XF86AudioMute exec "pactl list sinks | grep -oP 'Sink #\d+' | awk '{ print $2 }' | sed 's/#//g' | xargs -I{} pactl set-sink-mute {} toggle"
 bindsym XF86MonBrightnessUp exec "brightnessctl set +5%"
 bindsym XF86MonBrightnessDown exec "brightnessctl set 5%-"
 bindsym XF86NotificationCenter exec "systemctl suspend"
 bindsym $mod+alt+l exec $lock
-bindsym $mod+alt+o exec "pacmd set-card-profile bluez_card.94_DB_56_70_C8_69 a2dp_sink"
-bindsym $mod+alt+p exec "pacmd set-card-profile bluez_card.94_DB_56_70_C8_69 handsfree_head_unit"
+bindsym $mod+alt+p exec "pactl set-card-profile bluez_card.94_DB_56_70_C8_69 $(pactl info | grep -q a2dp && echo 'headset-head-unit' || echo 'a2dp-sink-ldac')"
 bindsym $mod+alt+i exec "bluetoothctl power on && bluetoothctl connect '94:DB:56:70:C8:69'"
 bindsym $mod+shift+b exec "killall -SIGUSR1 waybar"
 bindsym XF86Favorites exec $lock
@@ -254,13 +253,7 @@ bindsym XF86Favorites exec $lock
 bindsym $mod+Backspace exec ~/.config/sway/focus-firefox.sh
 bindsym $mod+Shift+s exec ~/.config/sway/sway-screenshare.sh
 # capture all screens to clipboard    
-bindsym $mod+slash exec (grim - | wl-copy) && notify-send "captured"
-    
-# capture the specified screen area to clipboard    
-bindsym $mod+shift+alt+slash exec (grim -g "$(XCURSOR_THEME=Adwaita XCURSOR_SIZE=10 slurp)" - | wl-copy) && notify-send "captured"
-    
-# capture the focused monitor to clipboard    
-bindsym $mod+shift+slash exec (grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy) && notify-send "captured"
+bindsym $mod+slash exec ~/.config/sway/sway-window-capture.sh
 
 #set $laptop eDP-1
 #bindswitch --reload --locked lid:on output $laptop disable
@@ -282,10 +275,10 @@ exec ~/.config/sway/inactive-windows-transparency.py
 exec_always kanshi
 
 # mute all audio sources 
-exec_always "pacmd list-sources | grep -oP 'index: \d+' | awk '{ print $2 }' | xargs -I{} pactl set-source-mute {} 1"
+exec_always "pactl list sources | grep -oP 'Source #\d+' | awk '{ print $2 }' | sed 's/#//g' | xargs -I{} pactl set-source-mute {} 1"
 
 # mute all audio sinks
-exec_always "pacmd list-sinks | grep -oP 'index: \d+' | awk '{ print $2 }' | xargs -I{} pactl set-sink-mute {} 1"
+exec_always "pactl list sinks | grep -oP 'Sink #\d+' | awk '{ print $2 }' | sed 's/#//g' | xargs -I{} pactl set-sink-mute {} 1"
 
 # apply gtk theme
 exec ~/.config/sway/config_gtk_theme.sh
