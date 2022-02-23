@@ -1,37 +1,24 @@
-
-# Internal
 profile "internal" {
-	output "Unknown 0x062C 0x00000000" enable scale 1
+	output eDP-1 enable scale 1
 }
 
-# Home
 profile "home" {
   output "Dell Inc. DELL U2913WM 5YD8C31H228L" mode 2560x1080 position 1920,0
-	output "Unknown 0x062C 0x00000000" enable position 0,0 scale 1
-}
-
-# Spaceship office ASUS Mon
-profile "office" {
-	output "Ancor Communications Inc ASUS PB279 0x00006F9" mode 2560x1440 position 0,0 scale 1
-	output "Unknown 0x062C 0x00000000" enable position 2560,280 scale 1
-}
-
-profile "other-hdmi" {
-	output HDMI-A-1 mode 1920x1080 position 1920,0 scale 1
-	output "Unknown 0x062C 0x00000000" enable position 0,0 scale 1
-}
-
-profile "other-dp" {
-	output DP-1 mode 1920x1080 position 1920,0 scale 1
-	output "Unknown 0x062C 0x00000000" enable position 0,0 scale 1
-}
-
-profile "Acer home" {
-  output "Dell Inc. DELL U2913WM 5YD8C31H228L" mode 2560x1080 position 1920,0
-	output "Unknown 0x683D 0x00000000" enable position 0,0 scale 1
+	output eDP-1 enable position 0,0 scale 1
 }
 
 profile "K11" {
   output "Unknown Mi Monitor 0000000000000" mode 3440x1440 position 0,0
-	output "Unknown 0x683D 0x00000000" enable position 3440,360 scale 1
+	output eDP-1 enable position 3440,360 scale 1
 }
+
+profile "fallback-hdmi" {
+	output HDMI-A-1 mode 1920x1080 position 1920,0 scale 1
+	output eDP-1 enable position 0,0 scale 1
+}
+
+profile "fallback-dp" {
+	output DP-1 mode 1920x1080 position 1920,0 scale 1
+	output eDP-1 enable position 0,0 scale 1
+}
+
