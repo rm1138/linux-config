@@ -19,10 +19,8 @@ Plug 'junegunn/fzf.vim'
 " Syntactic language support
 Plug 'rust-lang/rust.vim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-"Plug 'arzg/vim-rust-syntax-ext'
 Plug 'cespare/vim-toml'
 Plug 'stephpy/vim-yaml'
-"Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'mracos/mermaid.vim'
 Plug 'uarun/vim-protobuf'
@@ -306,13 +304,23 @@ local opts = {
 
 require('rust-tools').setup(opts)
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    'documentation',
+    'detail',
+    'additionalTextEdits',
+  }
+}
+
 lspconfig.tsserver.setup {
+    filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" },
     on_attach = function(client, bufnr)
         local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
         client.resolved_capabilities.document_formatting = false
         client.resolved_capabilities.document_range_formatting = false
-
 
         local ts_utils = require("nvim-lsp-ts-utils")
 
@@ -328,6 +336,7 @@ lspconfig.tsserver.setup {
         buf_set_keymap("n", "go", ":TSLspImportAll<CR>", opts) 
         on_attach(client, bufnr)
     end,
+    capabilities = capabilities,
 }
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -337,6 +346,13 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     update_in_insert = false,
   }
 )
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+lspconfig.cssls.setup {
+  capabilities = capabilities,
+}
 
 require("trouble").setup {
 
@@ -361,7 +377,7 @@ null_ls.setup {
            -- prefer_local = "node_modules/.bin",
         }),
         null_ls.builtins.formatting.prettier.with({ -- prettier, eslint, eslint_d, or prettierd
-            prefer_local = "node_modules/.bin",
+           -- prefer_local = "node_modules/.bin",
         }),
     },
     debug = true
@@ -377,7 +393,7 @@ require'nvim-treesitter.configs'.setup {
   sync_install = false,
 
   -- List of parsers to ignore installing
-  ignore_install = { "javascript" },
+  ignore_install = {  },
 
   highlight = {
     -- `false` will disable the whole extension
