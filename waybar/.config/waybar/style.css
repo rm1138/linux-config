@@ -2,7 +2,7 @@
 
 * {
   border: none;
-  font-family: "Hack", "Font Awesome 5 Free";
+  font-family: "Hack", "Font Awesome 6 Free";
   min-height: 0;
   border-radius: 0;
   color: @base06;
@@ -29,43 +29,41 @@ window#waybar {
 #tray,
 #temperature {
   padding: 0 8px;
+  border-top-color: rgba(255, 0, 0, 0);
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-bottom-color: rgba(0, 0, 0, 0);
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
 }
 
 #clock {
   font-size: 14;
 }
 
-#idle_inhibitor {
-  padding: 0 5px;
-}
-
-#idle_inhibitor.activated {
-  color: @base00;
-  background-color: rgba(255, 255, 255, 0.7);
-}
-
 #clock {
   font-weight: bold;
 }
 
+#network.linked {
+  border-bottom-color: @base0A;
+}
+
 #network.disconnected {
-  background-color: @base08;
+  border-bottom-color: @base08;
 }
 
 #temperature.critical {
-  background-color: @base09;
-  color: @base00;
+  border-bottom-color: @base09;
 }
 
 #battery.charging {
-  background-color: @base0B;
-  color: #212121;
+  border-bottom-color: @base0B;
 }
 
 @keyframes blink {
   to {
-    background-color: @base00;
-    color: #ffffff;
+    border-bottom-color: rgba(0, 0, 0, 0);
   }
 }
 
@@ -97,8 +95,7 @@ window#waybar {
 }
 
 #battery.critical:not(.charging) {
-  background-color: @base08;
-  color: #ffffff;
+  border-bottom-color: @base08;
   animation-name: blink;
   animation-duration: 1s;
   animation-timing-function: linear;
@@ -107,8 +104,7 @@ window#waybar {
 }
 
 #battery.warning:not(.charging) {
-  background-color: @base09;
-  color: #ffffff;
+  border-bottom-color: @base09;
   animation-name: blink;
   animation-duration: 0.5s;
   animation-timing-function: linear;

@@ -7,7 +7,7 @@
     "modules-center": ["clock"],
     "modules-right": [ "network", "cpu", "memory", "temperature", "battery", "pulseaudio", "tray"],
     "custom/coingecko": {
-        "interval": 15,
+        "interval": 20,
         "exec": "coingecko-waybar -c bitcoin:BTC,ethereum:ETH,solana:SOL,cardano:ADA,polkadot:DOT,avalanche-2:AVAX",
         "return-type": "json"
     },
@@ -66,17 +66,18 @@
         "format-unknown": "",
         "format-plugged": "",
         "format-full": "",
+        "format-not-charging": "",
         "format": "{icon} {capacity}%",
         "format-alt": "{capacity}% {power:.0}W {time}",
         "format-icons": ["", "", "", "", ""],
         "tooltip": false
     },
     "network": {
-        "format-wifi": "  {bandwidthDownBits}  {bandwidthUpBits}",
-        "format-ethernet": "  {bandwidthDownBits}  {bandwidthUpBits}",
+        "format-wifi": "",
+        "format-ethernet": "",
         "format-linked": "",
         "format-disconnected": "",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}  {bandwidthDownBits}  {bandwidthUpBits}",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
         "interval": 5
     },
@@ -104,9 +105,9 @@
     "position": "top",
     "height": 28,
     "output": "eDP-1",
-    "modules-left": ["sway/workspaces", "sway/mode",],
+    "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["clock"],
-    "modules-right": ["battery", "pulseaudio", "tray"],
+    "modules-right": ["network", "battery", "pulseaudio", "tray"],
     "sway/workspaces": {
         "disable-scroll": true,
         "disable-click": true,
@@ -119,13 +120,6 @@
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
-    },
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
     },
     "tray": {
         "spacing": 10
@@ -151,11 +145,22 @@
         "format-charging": " {capacity}% {power:.0}W {time}",
         "format-unknown": "",
         "format-plugged": "",
+        "format-not-charging": "",
         "format-full": "",
+        "format-not charging": "",
         "format": "{icon} {capacity}%",
         "format-alt": "{capacity}% {power:.0}W {time}",
         "format-icons": ["", "", "", "", ""],
         "tooltip": false
+    },
+    "network": {
+        "format-wifi": "",
+        "format-ethernet": "",
+        "format-linked": "",
+        "format-disconnected": "",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}  {bandwidthDownBits}  {bandwidthUpBits}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+        "interval": 5
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
